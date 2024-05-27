@@ -1,11 +1,219 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestão de Chaves</title>
+    <title>Gestão de Chaves - ICET</title>
+    <link rel="stylesheet" href="../../static/css/style.css">
+    <link rel="stylesheet" href="../../static/css/modal-cadastro.css">
 </head>
+
 <body>
-    
+    <header>
+        <div class="header-container">
+            <h3>Gestão de Chaves</h3>
+            <h4><img src="../img/ufam.png" alt="Logo ICET" id="logo">INSTITUTO DE CIÊNCIAS EXATAS E TECNOLOGIA</h4>
+        </div>
+    </header>
+
+    <div class="extern"></div>
+
+    <main class="main-container">
+        <section id="login-section">
+            <h2>Login</h2>
+            <form id="login-form">
+                <div>
+                    <label for="username">Usuário:</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div>
+                    <label for="password">Senha:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit">Entrar</button>
+            </form>
+        </section>
+
+        <section id="main-section" style="display: none;">
+            <nav id="sidebar">
+                <ul>
+                    <li><a href="#" id="btn-dashboard">Dashboard</a></li>
+                    <li><a href="#" id="btn-emprestimo">Realizar Empréstimo</a></li>
+                    <li><a href="#" id="btn-chaves">Visualizar Chaves</a></li>
+                    <li class="admin"><a href="#" id="btn-usuarios">Gerenciar Usuários</a></li>
+                    <li class="admin"><a href="#" id="btn-gerenciar-chaves">Gerenciar Chaves</a></li>
+                    <li class="admin"><a href="#" id="btn-registrar-devolucao-chaves">Registrar devolução de Chave</a></li>
+                    <li class="admin"><a href="#" id="btn-historico">Histórico de emprestimos</a></li>
+                    <li><a href="#" id="btn-logout">Sair</a></li>
+                </ul>
+            </nav>
+
+            <div id="content">
+                <div id="dashboard" class="content-section">
+                    <h2>Dashboard</h2>
+                    <p>Bem-vindo ao Sistema de Gestão de Chaves!</p>
+                </div>
+
+                <div id="emprestimo" class="content-section">
+                    <h2>Realizar Empréstimo</h2>
+                    <form id="emprestimo-form">
+                        <div>
+                            <label for="usuario-emprestimo">Usuário Externo:</label>
+                            <input type="text" id="usuario-emprestimo" name="usuario-emprestimo" required>
+                        </div>
+                        <div>
+                            <label for="chave-emprestimo">Chave:</label>
+                            <select id="chave-emprestimo" name="chave-emprestimo" required>
+                                <option value="">Selecione a chave</option>
+                            </select>
+                        </div>
+                        <button type="submit">Emprestar</button>
+                    </form>
+                </div>
+
+                <div id="chaves" class="content-section">
+                    <h2>Visualizar Chaves</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Tag</th>
+                                <th>Descrição</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="usuarios" class="content-section admin">
+                    <h2>Gerenciar Usuários</h2>
+                    <button id="btn-cadastrar-usuario">Cadastrar Usuário</button>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>CPF</th>
+                                <th>Email</th>
+                                <th>Tipo</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="gerenciar-chaves" class="content-section admin">
+                    <h2>Gerenciar Chaves</h2>
+                    <button id="btn-cadastrar-chave">Cadastrar Chave</button>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Tag</th>
+                                <th>Descrição</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="registrar-devolucao-chaves" class="content-section admin">
+                    <h2>Registrar devolução</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Tag</th>
+                                <th>Data de emprestimo</th>
+                                <th>Responsável</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="historico" class="content-section admin">
+                    <h2>Registro de Emprestimos</h2>
+                    <div id="div-filtrar">
+                       <div>
+                            <label for="responsavel-filtro">Responsável:</label>
+                            <input type="text" id="responsavel-filtro">
+                        </div>
+                        <div>
+                            <label for="data-inicio-filtro">Data de Início:</label>
+                            <input type="date" id="data-inicio-filtro">
+                        </div>
+                        <div>
+                            <label for="data-fim-filtro">Data de Fim:</label>
+                            <input type="date" id="data-fim-filtro">
+                        </div>
+                        <button id="btn-filtrar-historico">Filtrar</button> 
+                    </div>
+                    
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>Tag</th>
+                          <th>Responsável</th>
+                          <th>Data de emprestimo</th>
+                          <th>Data de devoluçao</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      </tbody>
+                    </table>
+                  </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal Cadastrar Usuário -->
+    <div id="modal-cadastrar-usuario" class="modal">
+        <div class="modal-content">
+            <span class="close-button">×</span>
+            <h2>Cadastrar Usuário</h2>
+            <form id="form-cadastrar-usuario">
+                <div>
+                    <label for="novo-usuario">Usuário:</label>
+                    <input type="text" id="novo-usuario" name="novo-usuario" required>
+                </div>
+                <div>
+                    <label for="nova-senha">Senha:</label>
+                    <input type="password" id="nova-senha" name="nova-senha" required>
+                </div>
+                <div>
+                    <label for="novo-cpf">CPF:</label>
+                    <input type="text" id="novo-cpf" name="novo-cpf" required>
+                </div>
+                <div>
+                    <label for="novo-email">Email:</label>
+                    <input type="email" id="novo-email" name="novo-email" required>
+                </div>
+                <div>
+                    <label for="tipo-usuario">Tipo de Usuário:</label>
+                    <select id="tipo-usuario" name="tipo-usuario">
+                        <option value="Administrador">Administrador</option>
+                        <option value="Externo">Externo</option>
+                    </select>
+                </div>
+                <button type="submit">Cadastrar</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="extern"></div>
+
+    <footer>
+        <div class="footer-container">
+            <p>© 2023 - ICET</p>
+        </div>
+    </footer>
+    <script type="module" src="../../static/js/script.js"></script>
 </body>
+
 </html>

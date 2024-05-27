@@ -1,0 +1,204 @@
+/* Geral */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f4f4f4;
+    color: #333;
+  }
+  
+  .main-container {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    height: 400px;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+  
+  /* Cabeçalho */
+  header {
+    background: #2160bd;
+    color: #fff;
+    padding: 0.1em 0;
+    text-align: center;
+  }
+  
+  .header-container {
+    height: 110px;
+  }
+
+  #logo {
+    vertical-align: middle;
+    margin-right: 10px;
+    height: 50px;
+  }
+  
+  /* Login */
+  #login-section {
+    width: 50%;
+    align-self: center;
+    text-align: center;
+    padding: 20px;
+    margin-top: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+  }
+  
+  #login-form label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  #login-form input[type="text"],
+  #login-form input[type="password"] {
+    width: 80%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 3px;
+    border: 1px solid #ddd;
+  }
+  
+  #login-form button {
+    padding: 10px 20px;
+    background-color: #5cb85c;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  
+  /* Seção Principal */
+  #main-section {
+    height: 100%;
+    display: flex;
+  }
+  
+  #sidebar {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    width: 20%;
+    background-color: #244f90;
+    color: #fff;
+    padding: 20px;
+  }
+  
+  #sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  #sidebar li a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #fff;
+  }
+  
+  #sidebar li a:hover {
+    background-color: #86ace687;
+    width: 100%;
+  }
+  
+  /* Conteúdo */
+  #content {
+    width: 80%;
+    padding: 20px;
+    background-color: #86ace687;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    
+  }
+  
+  .content-section {
+    display: none;
+  }
+  
+  .content-section h2 {
+    margin-top: 0;
+  }
+  
+  /* Formulários */
+  .content-section form label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+
+
+
+  .content-section form input[type="text"],
+  .content-section form input[type="password"],
+  .content-section form select {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 3px;
+    border: 1px solid #ddd;
+  }
+  
+  .content-section form button {
+    padding: 10px 20px;
+    background-color: #5cb85c;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+
+  button{
+    padding: 5px 20px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+
+  .admin form button {
+    padding: 10px 20px;
+    background-color: #5cb85c;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  
+  
+  /* Tabelas */
+  .content-section table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+
+  #div-filtrar{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+  }
+
+  #div-filtrar input{
+    padding: 5px 20px;
+  }
+  
+  .content-section th,
+  .content-section td {
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .extern {
+    height: 50px;
+  }
+
+
+  
+  /* Rodapé */
+  footer {
+    background: #2160bd;
+    color: #fff;
+    text-align: center;
+    padding: 1em 0;
+  }
