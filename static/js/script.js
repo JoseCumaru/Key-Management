@@ -2,7 +2,7 @@
 import { carregarUsuarios, cadastrarUsuario } from './usuarios.js';
 import { carregarChaves, realizarEmprestimo, carregarChavesDisponiveis } from './chaves.js';
 import {carregarHistorico, carregarHistoricoFiltro} from './historico.js';
-import { fazerLogin, fazerLogout } from './auth.js';
+import { fazerLogin, fazerLogout, verificarLogin } from './auth.js';
 
 // Seleciona os elementos do DOM
 const loginSection = document.getElementById('login-section');
@@ -134,8 +134,8 @@ formCadastrarUsuario.addEventListener('submit', async (event) => {
 
 // --- Inicializações ---
 document.addEventListener('DOMContentLoaded', () => {
+  verificarLogin();
   const selectChaveEmprestimo = document.getElementById('chave-emprestimo');
   selectChaveEmprestimo.innerHTML = '<option value="">Selecione a chave</option>';
   carregarChavesDisponiveis(); 
-  carregarEmprestimos();
 });

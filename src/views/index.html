@@ -7,13 +7,14 @@
     <title>Gestão de Chaves - ICET</title>
     <link rel="stylesheet" href="../../static/css/style.css">
     <link rel="stylesheet" href="../../static/css/modal-cadastro.css">
+    <link rel="stylesheet" href="../../static/css/dashboard.css">
 </head>
 
 <body>
     <header>
         <div class="header-container">
             <h3>Gestão de Chaves</h3>
-            <h4><img src="../img/ufam.png" alt="Logo ICET" id="logo">INSTITUTO DE CIÊNCIAS EXATAS E TECNOLOGIA</h4>
+            <h4><img src="../../static/img/ufam.png" alt="Logo ICET" id="logo">INSTITUTO DE CIÊNCIAS EXATAS E TECNOLOGIA</h4>
         </div>
     </header>
 
@@ -43,7 +44,8 @@
                     <li><a href="#" id="btn-chaves">Visualizar Chaves</a></li>
                     <li class="admin"><a href="#" id="btn-usuarios">Gerenciar Usuários</a></li>
                     <li class="admin"><a href="#" id="btn-gerenciar-chaves">Gerenciar Chaves</a></li>
-                    <li class="admin"><a href="#" id="btn-registrar-devolucao-chaves">Registrar devolução de Chave</a></li>
+                    <li class="admin"><a href="#" id="btn-registrar-devolucao-chaves">Registrar devolução de Chave</a>
+                    </li>
                     <li class="admin"><a href="#" id="btn-historico">Histórico de emprestimos</a></li>
                     <li><a href="#" id="btn-logout">Sair</a></li>
                 </ul>
@@ -90,7 +92,17 @@
                 <div id="usuarios" class="content-section admin">
                     <h2>Gerenciar Usuários</h2>
                     <button id="btn-cadastrar-usuario">Cadastrar Usuário</button>
-
+                    <div id="div-filtrar-usuarios">
+                        <div>
+                            <label for="usuario-filtro">Nome:</label>
+                            <input type="text" id="usuario-filtro">
+                        </div>
+                        <div>
+                            <label for="data-inicio-filtro">Matricula:</label>
+                            <input type="text" id="matricula-filtro">
+                        </div>
+                        <button id="btn-filtrar-usuario">Filtrar</button>
+                    </div>
                     <table>
                         <thead>
                             <tr>
@@ -109,6 +121,14 @@
                 <div id="gerenciar-chaves" class="content-section admin">
                     <h2>Gerenciar Chaves</h2>
                     <button id="btn-cadastrar-chave">Cadastrar Chave</button>
+                    <div id="div-filtrar-chaves">
+                        <div>
+                            <label for="chave-filtro">Chave:</label>
+                            <input type="text" id="chave-filtro">
+                        </div>
+
+                        <button id="btn-filtrar-chave">Filtrar</button>
+                    </div>
                     <table>
                         <thead>
                             <tr>
@@ -137,10 +157,12 @@
                         </tbody>
                     </table>
                 </div>
+
+                <!-- Historico de todos os emprestimos -->
                 <div id="historico" class="content-section admin">
                     <h2>Registro de Emprestimos</h2>
                     <div id="div-filtrar">
-                       <div>
+                        <div>
                             <label for="responsavel-filtro">Responsável:</label>
                             <input type="text" id="responsavel-filtro">
                         </div>
@@ -152,22 +174,28 @@
                             <label for="data-fim-filtro">Data de Fim:</label>
                             <input type="date" id="data-fim-filtro">
                         </div>
-                        <button id="btn-filtrar-historico">Filtrar</button> 
+                        <button id="btn-filtrar-historico">Filtrar</button>
                     </div>
-                    
-                    <table>
-                      <thead>
-                        <tr>
-                          <th>Tag</th>
-                          <th>Responsável</th>
-                          <th>Data de emprestimo</th>
-                          <th>Data de devoluçao</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                      </tbody>
+                    <div class="historico-table">
+                        <table>
+                        <thead>
+                            <tr>
+                                <th>Tag</th>
+                                <th>Responsável</th>
+                                <th>Data de emprestimo</th>
+                                <th>Data de devoluçao</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
                     </table>
-                  </div>
+                    </div>
+
+                    <div id="extern-paginacao">
+                      <div id="paginacao"></div>  
+                    </div>
+
+                </div>
             </div>
         </section>
     </main>
@@ -187,7 +215,7 @@
                     <input type="password" id="nova-senha" name="nova-senha" required>
                 </div>
                 <div>
-                    <label for="novo-cpf">CPF:</label>
+                    <label for="novo-cpf">RG:</label>
                     <input type="text" id="novo-cpf" name="novo-cpf" required>
                 </div>
                 <div>
@@ -197,8 +225,9 @@
                 <div>
                     <label for="tipo-usuario">Tipo de Usuário:</label>
                     <select id="tipo-usuario" name="tipo-usuario">
-                        <option value="Administrador">Administrador</option>
                         <option value="Externo">Externo</option>
+                        <option value="Administrador">Administrador</option>
+                        <option value="Guardinha">Guardinha</option>
                     </select>
                 </div>
                 <button type="submit">Cadastrar</button>
