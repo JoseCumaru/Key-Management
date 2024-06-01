@@ -5,7 +5,11 @@ const mongodb = require('mongodb');
 const chaveController = require('./src/controllers/chaveController');
 const usuarioController = require('./src/controllers/usuarioController');
 const emprestimoController = require('./src/controllers/emprestimoController');
+<<<<<<< Updated upstream
 const authController = require('./src/controllers/authController'); // Novo controlador para autenticação
+=======
+const authController = require('./src/controllers/authController');
+>>>>>>> Stashed changes
 
 const app = express();
 const port = 3000;
@@ -18,7 +22,11 @@ app.use(cors({
 }));
 
 
+<<<<<<< Updated upstream
 // Rota para login (movida para o controlador)
+=======
+// Rota para login 
+>>>>>>> Stashed changes
 app.post('/login', authController.login);
 
 // Rotas para chaves
@@ -28,12 +36,23 @@ app.post('/chaves', chaveController.cadastrarChave);
 app.put('/chaves/:id', chaveController.atualizarChave);
 app.delete('/chaves/:id', chaveController.excluirChave);
 
+<<<<<<< Updated upstream
 // Rotas para usuários
 app.get('/usuarios', usuarioController.buscarUsuarios);
+=======
+
+// Rotas para usuários
+app.get('/usuarios', usuarioController.buscarUsuarios);
+app.get('/usuarios/:id', usuarioController.buscarUsuario);
+>>>>>>> Stashed changes
 app.post('/cadastrarUsuario', usuarioController.cadastrarUsuario);
 app.put('/usuarios/:id', usuarioController.atualizarUsuario);
 app.delete('/usuarios/:id', usuarioController.excluirUsuario);
 
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 // Rotas para empréstimos
 app.post('/emprestimo', emprestimoController.registrarEmprestimo);
 app.get('/emprestimos', emprestimoController.buscarEmprestimos);

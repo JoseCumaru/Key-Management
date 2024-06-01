@@ -92,6 +92,7 @@
                 <div id="usuarios" class="content-section admin">
                     <h2>Gerenciar Usuários</h2>
                     <button id="btn-cadastrar-usuario">Cadastrar Usuário</button>
+<<<<<<< Updated upstream
                     <div id="div-filtrar-usuarios">
                         <div>
                             <label for="usuario-filtro">Nome:</label>
@@ -102,6 +103,18 @@
                             <input type="text" id="matricula-filtro">
                         </div>
                         <button id="btn-filtrar-usuario">Filtrar</button>
+=======
+                    <div id="div-filtrar-usuarios" class="filtro-div">
+                        <div>
+                            <label for="usuario-filtro">Nome:</label>
+                            <input type="text" id="usuario-filtro" class="filtro-input">
+                        </div>
+                        <div>
+                            <label for="data-inicio-filtro">Matricula:</label>
+                            <input type="text" id="matricula-filtro" class="filtro-input">
+                        </div>
+                        <button id="btn-filtrar-usuario" class="filtro-button">Filtrar</button>
+>>>>>>> Stashed changes
                     </div>
                     <table>
                         <thead>
@@ -118,9 +131,44 @@
                     </table>
                 </div>
 
+
+                <div id="modal-editar-usuario" class="modal">
+                    <div class="modal-content">
+                      <span class="close-button" onclick="document.getElementById('modal-editar-usuario').style.display='none';">&times;</span>
+                      <h2>Editar Usuário</h2>
+                      <form id="form-editar-usuario">
+                        <div>
+                          <label for="editar-usuario">Usuário:</label>
+                          <input type="text" id="editar-usuario" name="usuario" required>
+                        </div>
+                        <div>
+                          <label for="editar-cpf">CPF:</label>
+                          <input type="text" id="editar-cpf" name="cpf" required>
+                        </div>
+                        <div>
+                          <label for="editar-email">Email:</label>
+                          <input type="email" id="editar-email" name="email" required>
+                        </div>
+                        <div>
+                          <label for="editar-tipo">Tipo:</label>
+                          <input type="text" id="editar-tipo" name="tipo" required>
+                        </div>
+                        <div>
+                          <label for="editar-senha">Senha:</label>
+                          <input type="password" id="editar-senha" name="senha">
+                        </div>
+                        <button type="submit">Salvar</button>
+                      </form>
+                    </div>
+                  </div>
+                  
+               
+                  
+
                 <div id="gerenciar-chaves" class="content-section admin">
                     <h2>Gerenciar Chaves</h2>
                     <button id="btn-cadastrar-chave">Cadastrar Chave</button>
+<<<<<<< Updated upstream
                     <div id="div-filtrar-chaves">
                         <div>
                             <label for="chave-filtro">Chave:</label>
@@ -128,6 +176,15 @@
                         </div>
 
                         <button id="btn-filtrar-chave">Filtrar</button>
+=======
+                    <div id="div-filtrar-chaves" class="filtro-div">
+                        <div>
+                            <label for="chave-filtro">Chave:</label>
+                            <input type="text" id="chave-filtro" class="filtro-input">
+                        </div>
+
+                        <button id="btn-filtrar-chave" class="filtro-button">Filtrar</button>
+>>>>>>> Stashed changes
                     </div>
                     <table>
                         <thead>
@@ -142,8 +199,20 @@
                         </tbody>
                     </table>
                 </div>
+                
                 <div id="registrar-devolucao-chaves" class="content-section admin">
                     <h2>Registrar devolução</h2>
+                    <div id="div-filtrar-devolucao" class="filtro-div">
+                        <div>
+                            <label for="usuario-filtro">Nome:</label>
+                            <input type="text" id="nome-devolucao-filtro" class="filtro-input">
+                        </div>
+                        <div>
+                            <label for="data-inicio-filtro">Data:</label>
+                            <input type="text" id="data-devolucao-filtro" class="filtro-input">
+                        </div>
+                        <button id="btn-filtrar-devolucao" class="filtro-button">Filtrar</button>
+                    </div>
                     <table>
                         <thead>
                             <tr>
@@ -161,20 +230,28 @@
                 <!-- Historico de todos os emprestimos -->
                 <div id="historico" class="content-section admin">
                     <h2>Registro de Emprestimos</h2>
+<<<<<<< Updated upstream
                     <div id="div-filtrar">
+=======
+                    <div id="div-filtrar" class="filtro-div">
+>>>>>>> Stashed changes
                         <div>
                             <label for="responsavel-filtro">Responsável:</label>
-                            <input type="text" id="responsavel-filtro">
+                            <input type="text" id="responsavel-filtro" class="filtro-input">
                         </div>
                         <div>
                             <label for="data-inicio-filtro">Data de Início:</label>
-                            <input type="date" id="data-inicio-filtro">
+                            <input type="date" id="data-inicio-filtro" class="filtro-input">
                         </div>
                         <div>
                             <label for="data-fim-filtro">Data de Fim:</label>
-                            <input type="date" id="data-fim-filtro">
+                            <input type="date" id="data-fim-filtro" class="filtro-input">
                         </div>
+<<<<<<< Updated upstream
                         <button id="btn-filtrar-historico">Filtrar</button>
+=======
+                        <button id="btn-filtrar-historico" class="filtro-button">Filtrar</button>
+>>>>>>> Stashed changes
                     </div>
                     <div class="historico-table">
                         <table>
@@ -215,7 +292,11 @@
                     <input type="password" id="nova-senha" name="nova-senha" required>
                 </div>
                 <div>
+<<<<<<< Updated upstream
                     <label for="novo-cpf">RG:*</label>
+=======
+                    <label for="novo-cpf">RG:</label>
+>>>>>>> Stashed changes
                     <input type="text" id="novo-cpf" name="novo-cpf" required>
                 </div>
                 <div>

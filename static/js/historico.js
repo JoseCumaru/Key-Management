@@ -1,10 +1,17 @@
 
-
 export async function carregarHistorico(pagina = 1, limite = 6) {
   try {
     const response = await fetch(`http://localhost:3000/historico?pagina=${pagina}&limite=${limite}`);
     const data = await response.json();
 
+<<<<<<< Updated upstream
+export async function carregarHistorico(pagina = 1, limite = 6) {
+  try {
+    const response = await fetch(`http://localhost:3000/historico?pagina=${pagina}&limite=${limite}`);
+    const data = await response.json();
+
+=======
+>>>>>>> Stashed changes
     const tabelaHistorico = document.querySelector('#historico tbody');
     tabelaHistorico.innerHTML = '';
 
@@ -32,7 +39,11 @@ export async function carregarHistorico(pagina = 1, limite = 6) {
   }
 }
 
+<<<<<<< Updated upstream
 export async function carregarHistoricoFiltro(pagina = 1, limite = 4) {
+=======
+export async function carregarHistoricoFiltro(pagina = 1, limite = 6) {
+>>>>>>> Stashed changes
   const responsavel = document.getElementById('responsavel-filtro').value;
   const dataInicio = document.getElementById('data-inicio-filtro').value;
   const dataFim = document.getElementById('data-fim-filtro').value;

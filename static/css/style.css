@@ -1,10 +1,10 @@
 /* Geral */
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    background-color: #f4f4f4;
-    color: #333;
-  }
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background-color: #f4f4f4;
+  color: #333;
+}
   
   .main-container {
     display: flex;
@@ -69,7 +69,7 @@ body {
 
 
   .extern {
-    height: 50px;
+    height: 20px;
   }
 
 

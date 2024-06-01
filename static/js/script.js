@@ -1,5 +1,5 @@
 
-import { carregarUsuarios, cadastrarUsuario } from './usuarios.js';
+import { carregarUsuarios } from './usuarios.js';
 import { carregarChaves, realizarEmprestimo, carregarChavesDisponiveis } from './chaves.js';
 import {carregarHistorico, carregarHistoricoFiltro} from './historico.js';
 import { fazerLogin, fazerLogout, verificarLogin } from './auth.js';
@@ -82,7 +82,7 @@ const btnFecharModal = document.querySelector('#modal-cadastrar-usuario .close-b
 const btnAbrirModal = document.getElementById('btn-cadastrar-usuario');
 
 btnAbrirModal.addEventListener('click', () => {
-  modalCadastrarUsuario.style.display = 'block';
+  modalCadastrarUsuario.style.display = 'flex';
 });
 btnFecharModal.addEventListener('click', () => {
   modalCadastrarUsuario.style.display = 'none';

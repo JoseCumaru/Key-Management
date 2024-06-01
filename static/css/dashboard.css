@@ -131,6 +131,7 @@
     padding: 5px 20px;
   }
 
+<<<<<<< Updated upstream
   #div-filtrar-chaves{
     display: flex;
     flex-direction: row;
@@ -151,6 +152,22 @@
   #div-filtrar input{
     padding: 5px 20px;
   }
+=======
+  .filtro-div{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: flex-end;
+  }
+
+  .filtro-div input{
+    padding: 5px 20px;
+    border-radius: 4px;
+  }
+
+
+
+>>>>>>> Stashed changes
   
   .content-section th,
   .content-section td {

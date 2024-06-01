@@ -89,7 +89,7 @@ async function carregarEmprestimos() {
       const linha = document.createElement('tr');
       linha.innerHTML = `
         <td>${emprestimo.tag}</td> 
-        <td>${emprestimo.dataEmprestimo}</td> 
+        <td>${new Date(emprestimo.dataEmprestimo).toLocaleString()}</td> 
         <td>${emprestimo.usuario}</td> 
         <td>
           <button class="btn-registrar-devolucao" data-emprestimo-id="${emprestimo._id}">Registrar Devolução</button>
