@@ -6,7 +6,11 @@ const chaveController = require('./src/controllers/chaveController');
 const usuarioController = require('./src/controllers/usuarioController');
 const emprestimoController = require('./src/controllers/emprestimoController');
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 const authController = require('./src/controllers/authController'); // Novo controlador para autenticação
+=======
+const authController = require('./src/controllers/authController');
+>>>>>>> Stashed changes
 =======
 const authController = require('./src/controllers/authController');
 >>>>>>> Stashed changes
@@ -23,7 +27,11 @@ app.use(cors({
 
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 // Rota para login (movida para o controlador)
+=======
+// Rota para login 
+>>>>>>> Stashed changes
 =======
 // Rota para login 
 >>>>>>> Stashed changes
@@ -37,19 +45,29 @@ app.put('/chaves/:id', chaveController.atualizarChave);
 app.delete('/chaves/:id', chaveController.excluirChave);
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 // Rotas para usuários
 app.get('/usuarios', usuarioController.buscarUsuarios);
 =======
+=======
+>>>>>>> Stashed changes
 
 // Rotas para usuários
 app.get('/usuarios', usuarioController.buscarUsuarios);
 app.get('/usuarios/:id', usuarioController.buscarUsuario);
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 app.post('/cadastrarUsuario', usuarioController.cadastrarUsuario);
 app.put('/usuarios/:id', usuarioController.atualizarUsuario);
 app.delete('/usuarios/:id', usuarioController.excluirUsuario);
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 =======
 
 >>>>>>> Stashed changes

@@ -18,6 +18,9 @@
     overflow: auto;
     align-items: center; /* Centraliza verticalmente */
     justify-content: center; 
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     background-color: rgba(0, 0, 0, 0.4); 
   }
@@ -28,8 +31,14 @@
     padding: 20px;
     border: 1px solid #888;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     border-radius: 6px;
     width: 30%; 
+=======
+    border-radius: 3px;
+    width: 30%;
+    margin: 0; 
+>>>>>>> Stashed changes
 =======
     border-radius: 3px;
     width: 30%;

@@ -1,5 +1,9 @@
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 const { conectar } = require('../models/db'); 
+=======
+const { conectar } = require('../models/db');
+>>>>>>> Stashed changes
 =======
 const { conectar } = require('../models/db');
 >>>>>>> Stashed changes
@@ -11,9 +15,12 @@ async function buscarUsuarios(req, res) {
   try {
     const db = await conectar();
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     const usuarios = await db.collection('usuarios').find().toArray();
     res.json(usuarios);
 =======
+=======
+>>>>>>> Stashed changes
 
     // Buscar usuários da coleção 'usuarios'
     const usuariosInternos = await db.collection('usuarios').find().toArray();
@@ -25,6 +32,9 @@ async function buscarUsuarios(req, res) {
     const todosUsuarios = usuariosInternos.concat(usuariosExternos);
 
     res.json(todosUsuarios);
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
   } catch (error) {
     console.error('Erro ao carregar usuários:', error);
@@ -33,7 +43,10 @@ async function buscarUsuarios(req, res) {
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
 async function buscarUsuario(req, res) {
   const usuarioId = req.params.id;
   const colecao = req.query.colecao;
@@ -53,6 +66,9 @@ async function buscarUsuario(req, res) {
   }
 }
 
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 // Função para cadastrar um novo usuário
 async function cadastrarUsuario(req, res) {
@@ -74,7 +90,11 @@ async function cadastrarUsuario(req, res) {
 
     // Determina a coleção correta com base no tipo de usuário
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     const colecao = tipo === 'Externo' ? 'Externos' : 'usuarios';
+=======
+    const colecao = tipo === 'Externo' ? 'externos' : 'usuarios';
+>>>>>>> Stashed changes
 =======
     const colecao = tipo === 'Externo' ? 'externos' : 'usuarios';
 >>>>>>> Stashed changes
@@ -106,6 +126,10 @@ async function cadastrarUsuario(req, res) {
 async function atualizarUsuario(req, res) {
   const usuarioId = req.params.id;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+  const colecao = req.query.colecao;
+>>>>>>> Stashed changes
 =======
   const colecao = req.query.colecao;
 >>>>>>> Stashed changes
@@ -114,10 +138,13 @@ async function atualizarUsuario(req, res) {
   try {
     const db = await conectar();
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     const result = await db.collection('usuarios').updateOne(
       { _id: new mongodb.ObjectId(usuarioId) },
       { $set: { usuario, senha, cpf, email, tipo } }
 =======
+=======
+>>>>>>> Stashed changes
     
     const updateData = { usuario, cpf, email, tipo };
     if (senha) {
@@ -129,6 +156,9 @@ async function atualizarUsuario(req, res) {
     const result = await db.collection(colecao).updateOne(
       { _id: new mongodb.ObjectId(usuarioId) },
       { $set: updateData }
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     );
 
@@ -147,16 +177,22 @@ async function atualizarUsuario(req, res) {
 async function excluirUsuario(req, res) {
   const usuarioId = req.params.id;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
   try {
     const db = await conectar();
     const result = await db.collection('usuarios').deleteOne({ _id: new mongodb.ObjectId(usuarioId) });
 =======
+=======
+>>>>>>> Stashed changes
   const colecao = req.query.colecao;
 
   try {
     const db = await conectar();
     const result = await db.collection(colecao).deleteOne({ _id: new mongodb.ObjectId(usuarioId) });
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 
     if (result.deletedCount === 1) {
@@ -175,7 +211,12 @@ module.exports = {
   cadastrarUsuario,
   atualizarUsuario,
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   excluirUsuario
+=======
+  excluirUsuario,
+  buscarUsuario
+>>>>>>> Stashed changes
 =======
   excluirUsuario,
   buscarUsuario
