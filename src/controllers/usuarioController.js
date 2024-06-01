@@ -1,12 +1,4 @@
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-const { conectar } = require('../models/db'); 
-=======
 const { conectar } = require('../models/db');
->>>>>>> Stashed changes
-=======
-const { conectar } = require('../models/db');
->>>>>>> Stashed changes
 const mongodb = require('mongodb');
 const bcrypt = require('bcrypt');
 
@@ -14,13 +6,6 @@ const bcrypt = require('bcrypt');
 async function buscarUsuarios(req, res) {
   try {
     const db = await conectar();
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-    const usuarios = await db.collection('usuarios').find().toArray();
-    res.json(usuarios);
-=======
-=======
->>>>>>> Stashed changes
 
     // Buscar usuários da coleção 'usuarios'
     const usuariosInternos = await db.collection('usuarios').find().toArray();
@@ -32,21 +17,12 @@ async function buscarUsuarios(req, res) {
     const todosUsuarios = usuariosInternos.concat(usuariosExternos);
 
     res.json(todosUsuarios);
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
   } catch (error) {
     console.error('Erro ao carregar usuários:', error);
     res.status(500).json({ error: 'Erro ao carregar usuários' });
   }
 }
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
-=======
->>>>>>> Stashed changes
 async function buscarUsuario(req, res) {
   const usuarioId = req.params.id;
   const colecao = req.query.colecao;
@@ -66,10 +42,6 @@ async function buscarUsuario(req, res) {
   }
 }
 
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 // Função para cadastrar um novo usuário
 async function cadastrarUsuario(req, res) {
   const { usuario, senha, cpf, email, tipo } = req.body;
@@ -89,15 +61,7 @@ async function cadastrarUsuario(req, res) {
     const senhaHash = await bcrypt.hash(senha, saltRounds);
 
     // Determina a coleção correta com base no tipo de usuário
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-    const colecao = tipo === 'Externo' ? 'Externos' : 'usuarios';
-=======
     const colecao = tipo === 'Externo' ? 'externos' : 'usuarios';
->>>>>>> Stashed changes
-=======
-    const colecao = tipo === 'Externo' ? 'externos' : 'usuarios';
->>>>>>> Stashed changes
 
     // Insere o novo usuário na coleção correta
     const result = await db.collection(colecao).insertOne({
@@ -125,26 +89,11 @@ async function cadastrarUsuario(req, res) {
 // Função para atualizar um usuário existente
 async function atualizarUsuario(req, res) {
   const usuarioId = req.params.id;
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
   const colecao = req.query.colecao;
->>>>>>> Stashed changes
-=======
-  const colecao = req.query.colecao;
->>>>>>> Stashed changes
   const { usuario, senha, cpf, email, tipo } = req.body;
 
   try {
     const db = await conectar();
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-    const result = await db.collection('usuarios').updateOne(
-      { _id: new mongodb.ObjectId(usuarioId) },
-      { $set: { usuario, senha, cpf, email, tipo } }
-=======
-=======
->>>>>>> Stashed changes
     
     const updateData = { usuario, cpf, email, tipo };
     if (senha) {
@@ -156,10 +105,6 @@ async function atualizarUsuario(req, res) {
     const result = await db.collection(colecao).updateOne(
       { _id: new mongodb.ObjectId(usuarioId) },
       { $set: updateData }
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
     );
 
     if (result.modifiedCount === 1) {
@@ -176,24 +121,11 @@ async function atualizarUsuario(req, res) {
 // Função para excluir um usuário
 async function excluirUsuario(req, res) {
   const usuarioId = req.params.id;
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-
-  try {
-    const db = await conectar();
-    const result = await db.collection('usuarios').deleteOne({ _id: new mongodb.ObjectId(usuarioId) });
-=======
-=======
->>>>>>> Stashed changes
   const colecao = req.query.colecao;
 
   try {
     const db = await conectar();
     const result = await db.collection(colecao).deleteOne({ _id: new mongodb.ObjectId(usuarioId) });
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 
     if (result.deletedCount === 1) {
       res.json({ message: 'Usuário excluído com sucesso!' });
@@ -210,15 +142,6 @@ module.exports = {
   buscarUsuarios,
   cadastrarUsuario,
   atualizarUsuario,
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-  excluirUsuario
-=======
   excluirUsuario,
   buscarUsuario
->>>>>>> Stashed changes
-=======
-  excluirUsuario,
-  buscarUsuario
->>>>>>> Stashed changes
 };

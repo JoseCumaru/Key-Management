@@ -1,94 +1,72 @@
 /* Estilo do Modal */
 
-
-
 .modal {
-    display: none; 
-    position: fixed; 
-    z-index: 1; 
-    left: 0;
-    top: 0;
-<<<<<<< Updated upstream
-    width: 100%;
-    height: 100%;
-    overflow: auto; 
-=======
-    width: 100%; 
-    height: 100%; 
-    overflow: auto;
-    align-items: center; /* Centraliza verticalmente */
-    justify-content: center; 
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-    background-color: rgba(0, 0, 0, 0.4); 
-  }
-  
-  .modal-content {
-    background-color: #fefefe;
-    margin: 5% auto; 
-    padding: 20px;
-    border: 1px solid #888;
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-    border-radius: 6px;
-    width: 30%; 
-=======
-    border-radius: 3px;
-    width: 30%;
-    margin: 0; 
->>>>>>> Stashed changes
-=======
-    border-radius: 3px;
-    width: 30%;
-    margin: 0; 
->>>>>>> Stashed changes
-  }
-  
-  /* Botão de Fechar */
-  .close-button {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-  }
-  
-  .close-button:hover,
-  .close-button:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-  }
-  
-  /* Formulário dentro do Modal */
-  .modal-content label {
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  .modal-content input[type="text"],
-  .modal-content input[type="password"],
-  .modal-content input[type="email"],
-  .modal-content select {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box; 
-  }
-  
-  .modal-content button {
-    padding: 10px 20px;
-    background-color: #4CAF50; 
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  
-  .modal-content button:hover {
-    background-color: #45a049;
-  }
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  align-items: center; /* Centraliza verticalmente */
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  border-radius: 3px;
+  width: 30%;
+  margin: 0;
+}
+
+/* Botão de Fechar */
+.close-button {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close-button:hover,
+.close-button:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Formulário dentro do Modal */
+.modal-content label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.modal-content input[type="text"],
+.modal-content input[type="password"],
+.modal-content input[type="email"],
+.modal-content select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.modal-content button {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.modal-content button:hover {
+  background-color: #45a049;
+}
