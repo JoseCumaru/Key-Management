@@ -7,9 +7,12 @@ async function registrarEmprestimo(req, res) {
 
   try {
     const db = await conectar();
-    const usuarioExiste = await db.collection('usuarios').findOne({ usuario });
+    
+    //const usuarioExiste = await db.collection('usuarios').findOne({ usuario });
 
-    if (!usuarioExiste) {
+    const usuarioExistente = await db.collection('usuarios').findOne({ usuario }) || await db.collection('externos').findOne({ usuario });
+
+    if (!usuarioExistente) {
       return res.status(400).json({ error: 'Usuário não encontrado.' });
     }
 

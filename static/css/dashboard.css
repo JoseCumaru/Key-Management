@@ -184,3 +184,8 @@
     background-color: #33333371;
     border-radius: 30px;
   }
+
+
+  label{
+    font-variant: all-small-caps;
+  }
