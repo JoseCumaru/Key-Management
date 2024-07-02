@@ -1,7 +1,6 @@
-const chavesTable = document.querySelector('#gerenciar-chaves tbody');
-const btnCadastrarChave = document.getElementById('btn-cadastrar-chave');
-const emprestimoForm = document.getElementById('emprestimo-form');
-const emprestimosTable = document.querySelector('#registrar-devolucao-chaves tbody');
+const labGrid = document.getElementById('lab-grid');
+const modalAutorizarEmprestimo = document.getElementById('modal-autorizar-emprestimo');
+const formAutorizarEmprestimo = document.getElementById('form-autorizar-emprestimo');
 
 export async function carregarChaves() {
   try {
@@ -26,6 +25,73 @@ export async function carregarChaves() {
   }
 }
 
+export async function carregarChavesLabs() {
+  const labGrid = document.getElementById('lab-grid');
+  const blocosGrid = document.getElementById('blocos-grid');
+  const btnVoltarBlocos = document.getElementById('btn-voltar-blocos');
+  const modalAutorizarEmprestimo = document.getElementById('modal-autorizar-emprestimo');
+
+  function renderizarLabs(labs) {
+    labGrid.innerHTML = ''; // Limpa o conteúdo anterior
+
+    labs.forEach(lab => {
+      const labSquare = document.createElement('div');
+      labSquare.classList.add('lab-square');
+      labSquare.textContent = lab.tag; // Adiciona o texto
+      labSquare.dataset.chave = lab.tag; // Armazena a tag
+
+      // Adiciona classe de acordo com o status
+      labSquare.classList.add(lab.status === 'Disponível' ? 'disponivel' : 'indisponivel');
+
+      labSquare.addEventListener('click', handleLabClick); // Adiciona evento de clique
+      labGrid.appendChild(labSquare); // Adiciona o quadrado ao grid
+    });
+
+    // Exibe o grid de laboratórios e oculta os blocos
+    labGrid.style.display = 'grid';
+    blocosGrid.style.display = 'none';
+    btnVoltarBlocos.style.display = 'block';
+  }
+
+  function handleLabClick(event) {
+    if (event.target.classList.contains('disponivel')) {
+      const chaveSelecionada = event.target.dataset.chave;
+      document.getElementById('chave-emprestimo').value = chaveSelecionada; // Preenche o campo oculto com a chave selecionada
+      modalAutorizarEmprestimo.style.display = 'flex'; // Abre o modal
+      // Event listener para fechar o modal ao clicar fora dele
+      window.addEventListener('click', (event) => {
+        if (event.target == modalAutorizarEmprestimo) {
+          modalAutorizarEmprestimo.style.display = 'none'; // Fecha o modal
+        }
+      });
+    }
+  }
+
+  // Event listener para o botão "Voltar para Blocos"
+  btnVoltarBlocos.addEventListener('click', () => {
+    labGrid.style.display = 'none';
+    blocosGrid.style.display = 'grid';
+    btnVoltarBlocos.style.display = 'none';
+  });
+
+// Event listeners para os botões de bloco
+document.querySelectorAll('.bloco').forEach(button => {
+    button.addEventListener('click', async (event) => {
+      const bloco = event.target.dataset.bloco;
+      try {
+        const response = await fetch(`http://localhost:3000/chaves`);
+        const labs = await response.json();
+        const labsBlocoSelecionado = labs.filter(lab => lab.bloco === bloco);
+        renderizarLabs(labsBlocoSelecionado); // Chama a função para renderizar os quadrados
+      } catch (error) {
+        console.error('Erro ao carregar chaves laboratoriais:', error);
+        alert('Ocorreu um erro ao carregar as chaves laboratoriais.');
+      }
+    });
+  });
+}
+
+
 export async function carregarChavesDisponiveis() {
   try {
     const response = await fetch('http://localhost:3000/chaves-disponiveis');
@@ -46,98 +112,15 @@ export async function carregarChavesDisponiveis() {
   }
 }
 
-export async function realizarEmprestimo(event) {
-  event.preventDefault();
-
-  const usuarioEmprestimo = document.getElementById('usuario-emprestimo').value;
-  const chaveEmprestimo = document.getElementById('chave-emprestimo').value;
-
-  try {
-    const response = await fetch('http://localhost:3000/emprestimo', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ usuario: usuarioEmprestimo, chave: chaveEmprestimo })
-    });
-
-    if (response.ok) {
-      alert('Empréstimo realizado com sucesso!');
-      carregarChavesDisponiveis();
-      emprestimoForm.reset(); 
-    } else {
-      const errorData = await response.json();
-      alert(errorData.error);
-    }
-  } catch (error) {
-    console.error('Erro ao realizar empréstimo:', error);
-    alert('Ocorreu um erro ao realizar o empréstimo.');
-  }
-}
-
-async function carregarEmprestimos() {
-  try {
-    const response = await fetch('http://localhost:3000/emprestimos');
-    const emprestimos = await response.json();
-
-    emprestimosTable.innerHTML = '';
-
-    if(!emprestimos){
-      const linha = document.createElement('h1');
-      linha.innerHTML = `Não há emprestimos`
-        }
-    
-    emprestimos.forEach(emprestimo => {
-      const linha = document.createElement('tr');
-      linha.innerHTML = `
-        <td>${emprestimo.tag}</td> 
-        <td>${new Date(emprestimo.dataEmprestimo).toLocaleString()}</td> 
-        <td>${emprestimo.usuario}</td> 
-        <td>
-          <button class="btn-registrar-devolucao" data-emprestimo-id="${emprestimo._id}">Registrar Devolução</button>
-        </td>
-      `;
-      emprestimosTable.appendChild(linha);
-    });
-
-    
-
-  } catch (error) {
-    console.error('Erro ao carregar empréstimos:', error);
-    alert('Ocorreu um erro ao carregar os empréstimos.');
-  }
-}
-
-async function registrarDevolucao(emprestimoId) {
-  if (confirm('Confirmar devolução?')) {
-    try {
-      const response = await fetch(`http://localhost:3000/devolucao/${emprestimoId}`, {
-        method: 'POST'
-      });
-
-      if (response.ok) {
-        alert('Devolução registrada com sucesso!');
-        carregarEmprestimos(); 
-        carregarChavesDisponiveis();
-      } else {
-        const errorData = await response.json();
-        alert(errorData.error);
-      }
-
-    } catch (error) {
-      console.error('Erro ao registrar devolução:', error);
-      alert('Ocorreu um erro ao registrar a devolução.');
-    }
-  }
-}
-
-// Event listeners 
-document.addEventListener('DOMContentLoaded', carregarChavesDisponiveis);
-emprestimoForm.addEventListener('submit', realizarEmprestimo); 
-document.getElementById('btn-registrar-devolucao-chaves').addEventListener('click', carregarEmprestimos);
-
-emprestimosTable.addEventListener('click', async (event) => {
-  if (event.target.classList.contains('btn-registrar-devolucao')) {
-    const emprestimoId = event.target.dataset.emprestimoId; 
-    registrarDevolucao(emprestimoId);
-  }
+// Event listeners
+document.addEventListener('DOMContentLoaded', () => {
+  carregarChavesDisponiveis();
+  carregarChaves(); // Carrega todas as chaves na tabela
+  carregarChavesLabs(); // Carrega os quadrados dos laboratórios
 });
 
+// Função para lidar com o clique nos laboratórios
+function handleLabClick(event) {
+  const chaveSelecionada = event.target.dataset.chave;
+  document.getElementById('chave-emprestimo').value = chaveSelecionada; // Preenche o campo oculto com a chave selecionada
+}

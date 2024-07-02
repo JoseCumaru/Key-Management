@@ -24,6 +24,11 @@
   margin: 0;
 }
 
+.form-modal{
+  display: flex;
+  flex-direction: column;
+}
+
 /* Botão de Fechar */
 .close-button {
   color: #aaa;

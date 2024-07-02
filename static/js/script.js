@@ -1,6 +1,7 @@
 
 import { carregarUsuarios } from './usuarios.js';
-import { carregarChaves, realizarEmprestimo, carregarChavesDisponiveis } from './chaves.js';
+import { carregarChaves, carregarChavesLabs, carregarChavesDisponiveis } from './chaves.js';
+import { carregarAutorizacoesPendentes } from './emprestimo.js';
 import {carregarHistorico, carregarHistoricoFiltro} from './historico.js';
 import { fazerLogin, fazerLogout, verificarLogin } from './auth.js';
 
@@ -24,12 +25,17 @@ export function carregarAreaPrincipal(tipoUsuario) {
   loginSection.style.display = 'none';
   mainSection.style.display = 'flex';
 
-
   if (tipoUsuario === 'Administrador') {
     sidebar.querySelectorAll('.admin').forEach(item => {
       item.style.display = 'block';
     });
+    sidebar.querySelectorAll('.guardinha').forEach(item => {
+      item.style.display = 'none';
+    });
   } else {
+    sidebar.querySelectorAll('.guardinha').forEach(item => {
+      item.style.display = 'block';
+    });
     sidebar.querySelectorAll('.admin').forEach(item => {
       item.style.display = 'none';
     });
@@ -46,8 +52,8 @@ document.getElementById('btn-logout').addEventListener('click', fazerLogout);
 
 
 
-//        --- Navegação do menu lateral ---
 
+//        --- Navegação do menu lateral ---
 sidebar.addEventListener('click', (event) => {
   if (event.target.tagName === 'A') {
     const secaoId = event.target.id.replace('btn-', '');
@@ -58,7 +64,11 @@ sidebar.addEventListener('click', (event) => {
         carregarUsuarios();
         break;
       case 'chaves':
+        console.log("carregarChaves")
         carregarChaves();
+        break;
+      case 'gerenciar-emprestimos':
+        carregarAutorizacoesPendentes(); // Chame a função
         break;
       case 'historico':
         carregarHistorico();
@@ -66,6 +76,9 @@ sidebar.addEventListener('click', (event) => {
           carregarHistoricoFiltro();
         });
         break;
+      case 'gerenciar-emprestimos':
+          carregarAutorizacoesPendentes();
+          break;
       default:
         break;
     }
@@ -75,7 +88,6 @@ sidebar.addEventListener('click', (event) => {
 
 
 //     ---  Gerenciamento de Usuários ---
-
 const modalCadastrarUsuario = document.getElementById('modal-cadastrar-usuario');
 const btnFecharModal = document.querySelector('#modal-cadastrar-usuario .close-button');
 
@@ -128,6 +140,13 @@ formCadastrarUsuario.addEventListener('submit', async (event) => {
     alert('Ocorreu um erro ao cadastrar o usuário.');
   }
 });
+
+
+
+function handleLabClick(event) {
+  const chaveSelecionada = event.target.dataset.chave;
+  document.getElementById('chave-emprestimo').value = chaveSelecionada; 
+}
 
 
 

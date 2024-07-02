@@ -33,7 +33,9 @@ app.put('/usuarios/:id', usuarioController.atualizarUsuario);
 app.delete('/usuarios/:id', usuarioController.excluirUsuario);
 
 // Rotas para empréstimos
-app.post('/emprestimo', emprestimoController.registrarEmprestimo);
+app.post('/autorizarEmprestimo', emprestimoController.autorizarEmprestimo);
+app.post('/realizarEmprestimo', emprestimoController.realizarEmprestimo);
+app.get('/autorizacoesPendentes', emprestimoController.buscarAutorizacoesPendentes);
 app.get('/emprestimos', emprestimoController.buscarEmprestimos);
 app.post('/devolucao/:id', emprestimoController.registrarDevolucao);
 
@@ -80,6 +82,8 @@ app.get('/historico', async (req, res) => {
     res.status(500).json({ error: 'Erro ao carregar histórico de empréstimos' });
   }
 });
+
+
 
 app.listen(port, () => {
   console.log(`Servidor rodando em http://localhost:${port}`);

@@ -14,7 +14,8 @@
     <header>
         <div class="header-container">
             <h3>Gestão de Chaves</h3>
-            <h4><img src="../../static/img/ufam.png" alt="Logo ICET" id="logo">INSTITUTO DE CIÊNCIAS EXATAS E TECNOLOGIA</h4>
+            <h4><img src="../../static/img/ufam.png" alt="Logo do Instituto de Ciências Exatas e Tecnologia" id="logo">INSTITUTO DE CIÊNCIAS EXATAS E TECNOLOGIA</h4>
+
         </div>
     </header>
 
@@ -39,12 +40,15 @@
         <section id="main-section" style="display: none;">
             <nav id="sidebar">
                 <ul>
-                    <li><a href="#" id="btn-dashboard">Dashboard</a></li>
-                    <li><a href="#" id="btn-emprestimo">Realizar Empréstimo</a></li>
-                    <li><a href="#" id="btn-chaves">Visualizar Chaves</a></li>
+                    <li class="guardinha"><a href="#" id="btn-dashboard">Dashboard Guardinha</a></li>
+                    <li class="guardinha"><a href="#" id="btn-gerenciar-emprestimos">Gerenciar Empréstimo</a></li>
+                    <li class="guardinha"><a href="#" id="btn-chaves">Visualizar Chaves</a></li>
+                    <li class="guardinha"><a href="#" id="btn-registrar-devolucao-chaves">Registrar devolução de Chave</a></li>
+                    <li class="admin"><a href="#" id="btn-dashboard">Dashboard Admin</a></li>
+                    <li class="admin"><a href="#" id="btn-autorizar-emprestimo">Autorizar Empréstimo</a></li>
+                    <li class="admin"><a href="#" id="btn-chaves">Visualizar Chaves</a></li>
                     <li class="admin"><a href="#" id="btn-usuarios">Gerenciar Usuários</a></li>
                     <li class="admin"><a href="#" id="btn-gerenciar-chaves">Gerenciar Chaves</a></li>
-                    <li class="admin"><a href="#" id="btn-registrar-devolucao-chaves">Registrar devolução de Chave</a></li>
                     <li class="admin"><a href="#" id="btn-historico">Histórico de emprestimos</a></li>
                     <li><a href="#" id="btn-logout">Sair</a></li>
                 </ul>
@@ -56,22 +60,50 @@
                     <p>Bem-vindo ao Sistema de Gestão de Chaves!</p>
                 </div>
 
-                <div id="emprestimo" class="content-section">
-                    <h2>Realizar Empréstimo</h2>
-                    <form id="emprestimo-form">
+                <!-- Onde os admin podem autorizar o emprestimo de chaves -->
+                <div id="autorizar-emprestimo" class="content-section">
+                    <h2>Autorizar Empréstimo</h2>
+                    
+                    <div id="autorizar-emprestimo">
                         <div>
-                            <label for="usuario-emprestimo">Usuário Externo:</label>
-                            <input type="text" id="usuario-emprestimo" name="usuario-emprestimo" required>
+                            <label for="chave-emprestimo">Blocos:</label>
+                            <div id="blocos-grid" class="grid-container">
+                                <button class="grid-item bloco" data-bloco="A">Bloco A</button>
+                                <button class="grid-item bloco" data-bloco="B">Bloco B</button>
+                                <button class="grid-item bloco" data-bloco="C">Bloco C</button>
+                                <button class="grid-item bloco" data-bloco="D">Bloco D</button>
+                            </div>
+                            <button type="button" id="btn-voltar-blocos" style="display: none;">Voltar para Blocos</button>
+                            <div id="lab-grid" class="grid-container" style="display: none;">
+                                <!-- Os laboratórios serão inseridos aqui dinamicamente via JavaScript -->
+                            </div>
+                            
                         </div>
-                        <div>
-                            <label for="chave-emprestimo">Chave:</label>
-                            <select id="chave-emprestimo" name="chave-emprestimo" required>
-                                <option value="">Selecione a chave</option>
-                            </select>
-                        </div>
-                        <button type="submit">Emprestar</button>
-                    </form>
+                        <input type="hidden" id="chave-emprestimo" name="chave-emprestimo" required>
+                        
+                    </div>
                 </div>
+                
+                <!-- Modal de Autorização de Empréstimo -->
+                <div id="modal-autorizar-emprestimo" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h2>Autorizar Empréstimo</h2>
+                        <form id="autorizar-emprestimo-form" class="form-modal">
+                            <div>
+                                <label for="nome-externo">Nome:</label>
+                                <input type="text" id="usuario-emprestimo" name="usuario-emprestimo" required>
+                            </div>
+                            <div>
+                                <label for="matricula-externo">Matrícula:</label>
+                                <input type="text" id="matricula-externo" name="matricula-externo" required>
+                            </div>
+                            <button type="submit">Autorizar</button>
+                        </form>
+                    </div>
+                </div>
+  
+  
 
                 <div id="chaves" class="content-section">
                     <h2>Visualizar Chaves</h2>
@@ -118,12 +150,12 @@
                     </table>
                 </div>
 
-
+                
                 <div id="modal-editar-usuario" class="modal">
                     <div class="modal-content">
                       <span class="close-button" onclick="document.getElementById('modal-editar-usuario').style.display='none';">&times;</span>
                       <h2>Editar Usuário</h2>
-                      <form id="form-editar-usuario">
+                      <form id="form-editar-usuario" class="form-modal">
                         <div>
                           <label for="editar-usuario">Usuário:</label>
                           <input type="text" id="editar-usuario" name="usuario" required>
@@ -178,6 +210,7 @@
                     </table>
                 </div>
                 
+                <!-- Onde o guardinha registra a devolucao da chave -->
                 <div id="registrar-devolucao-chaves" class="content-section admin">
                     <h2>Registrar devolução</h2>
                     <div id="div-filtrar-devolucao" class="filtro-div">
@@ -203,6 +236,35 @@
                         <tbody>
                         </tbody>
                     </table>
+                </div>
+
+                <!-- Onde o guardinha pode verificar todas as autorizaçoes -->
+                <div id="gerenciar-emprestimos" class="content-section">
+                    <h2>Gerenciar Empréstimo</h2>
+                    <form id="emprestimo-form">
+                        <div id="div-filtrar" class="filtro-div">
+                            <div>
+                                <label for="usuario-filtro">Nome:</label>
+                                <input type="text" id="nome-filtro" class="filtro-input">
+                            </div>
+                            <div>
+                                <label for="data-inicio-filtro">CPF:</label>
+                                <input type="text" id="cpf-filtro" class="filtro-input">
+                            </div>
+                            <button id="btn-filtrar-devolucao" class="filtro-button">Filtrar</button>
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Usuário</th>
+                                    <th>Chave</th>
+                                    <th>Ação</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </form>
                 </div>
 
                 <!-- Historico de todos os emprestimos -->
@@ -253,6 +315,7 @@
                 </div>
             </div>
         </section>
+
     </main>
 
     <!-- Modal Cadastrar Usuário -->
@@ -260,7 +323,7 @@
         <div class="modal-content">
             <span class="close-button">×</span>
             <h2>Cadastrar Usuário</h2>
-            <form id="form-cadastrar-usuario">
+            <form id="form-cadastrar-usuario" class="form-modal">
                 <div>
                     <label for="novo-usuario">Usuário:*</label>
                     <input type="text" id="novo-usuario" name="novo-usuario" required>
@@ -270,13 +333,7 @@
                     <input type="password" id="nova-senha" name="nova-senha" required>
                 </div>
                 <div>
-
-                    <label for="novo-cpf">RG:*</label>
-
                     <label for="novo-cpf">RG:</label>
-
-                    <label for="novo-cpf">RG:</label>
-
                     <input type="text" id="novo-cpf" name="novo-cpf" required>
                 </div>
                 <div>
@@ -300,7 +357,7 @@
 
     <footer>
         <div class="footer-container">
-            <p>© 2023 - ICET</p>
+            <p>© 2024 - ICET</p>
         </div>
     </footer>
     <script type="module" src="../../static/js/script.js"></script>

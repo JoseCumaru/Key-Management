@@ -13,6 +13,7 @@ async function buscarChaves(req, res) {
   }
 }
 
+
 // Função para buscar chaves disponíveis (status: "Disponível")
 async function buscarChavesDisponiveis(req, res) {
   try {
