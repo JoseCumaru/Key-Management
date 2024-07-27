@@ -67,6 +67,9 @@ sidebar.addEventListener('click', (event) => {
         console.log("carregarChaves")
         carregarChaves();
         break;
+      case 'gerenciar-chaves':
+        carregarChaves();
+        break;
       case 'gerenciar-emprestimos':
         carregarAutorizacoesPendentes(); // Chame a função
         break;
@@ -95,15 +98,13 @@ const btnAbrirModal = document.getElementById('btn-cadastrar-usuario');
 
 btnAbrirModal.addEventListener('click', () => {
   modalCadastrarUsuario.style.display = 'flex';
+  document.getElementById('novo-usuario').value = '';
+  document.getElementById('nova-senha').value = '';
 });
 btnFecharModal.addEventListener('click', () => {
   modalCadastrarUsuario.style.display = 'none';
 });
-window.onclick = function(event) {
-  if (event.target == modalCadastrarUsuario) {
-    modalCadastrarUsuario.style.display = 'none';
-  }
-}
+
 
 
 // Adiciona evento de submit ao formulário de cadastro de usuário

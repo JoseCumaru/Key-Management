@@ -7,7 +7,7 @@ export async function carregarChaves() {
     const response = await fetch('http://localhost:3000/chaves');
     const chaves = await response.json();
 
-    const tabelaChaves = document.querySelector('#chaves tbody');
+    const tabelaChaves = document.querySelector('#gerenciar-chaves tbody');
     tabelaChaves.innerHTML = '';
 
     chaves.forEach(chave => {
