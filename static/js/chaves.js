@@ -1,6 +1,109 @@
 const labGrid = document.getElementById('lab-grid');
-const modalAutorizarEmprestimo = document.getElementById('modal-autorizar-emprestimo');
-const formAutorizarEmprestimo = document.getElementById('form-autorizar-emprestimo');
+const blocosGrid = document.getElementById('blocos-grid');
+const btnVoltarBlocos = document.getElementById('btn-voltar-blocos');
+const modalEmprestimo = document.getElementById('modal-emprestimo');
+const modalDevolucao = document.getElementById('modal-devolucao');
+const formEmprestimo = document.getElementById('form-emprestimo');
+const formDevolucao = document.getElementById('form-devolucao');
+const verificarMatriculaBtn = document.getElementById('verificar-matricula');
+const usuarioInfo = document.getElementById('usuario-info');
+const nomeUsuarioSpan = document.getElementById('nome-usuario');
+const divMatricula = document.getElementById('matricula-emprestimo');
+
+function fecharModal(modal) {
+  modal.style.display = 'none';
+  formEmprestimo.reset();
+  formDevolucao.reset();
+  usuarioInfo.style.display = 'none';
+  divMatricula.style.display = 'block';
+}
+
+document.querySelectorAll('.close').forEach(btn => btn.addEventListener('click', () => {
+  fecharModal(modalEmprestimo);
+  fecharModal(modalDevolucao);
+}));
+
+window.addEventListener('click', (event) => {
+  if (event.target == modalEmprestimo) {
+    fecharModal(modalEmprestimo);
+  }
+  if (event.target == modalDevolucao) {
+    fecharModal(modalDevolucao);
+  }
+});
+
+formEmprestimo.addEventListener('submit', async (event) => {
+  event.preventDefault();
+  const matricula = document.getElementById('matricula').value;
+  const senha = document.getElementById('senha').value;
+  const chave = document.getElementById('chave-emprestimo').value;
+  const nomeUsuario = nomeUsuarioSpan.textContent;
+
+  try {
+    const response = await fetch('http://localhost:3000/realizarEmprestimo', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ matricula, senha, usuario: nomeUsuario, chave })
+    });
+
+    if (response.ok) {
+      alert('Empréstimo realizado com sucesso!');
+      fecharModal(modalEmprestimo);
+    } else {
+      const errorData = await response.json();
+      alert(errorData.error);
+    }
+  } catch (error) {
+    console.error('Erro ao realizar empréstimo:', error);
+    alert('Ocorreu um erro ao realizar o empréstimo.');
+  }
+});
+
+formDevolucao.addEventListener('submit', async (event) => {
+  event.preventDefault();
+  const senha = document.getElementById('senha-devolucao').value;
+  const chave = document.getElementById('chave-devolucao').value;
+  const matricula = document.getElementById('matricula-devolucao').value;
+
+  try {
+    const response = await fetch('http://localhost:3000/devolucao', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ senha, chave, matricula })
+    });
+
+    if (response.ok) {
+      alert('Devolução registrada com sucesso!');
+      fecharModal(modalDevolucao);
+    } else {
+      const errorData = await response.json();
+      alert(errorData.error);
+    }
+  } catch (error) {
+    console.error('Erro ao registrar devolução:', error);
+    alert('Ocorreu um erro ao registrar a devolução.');
+  }
+});
+
+verificarMatriculaBtn.addEventListener('click', async () => {
+  const matricula = document.getElementById('matricula').value;
+
+  try {
+    const response = await fetch(`http://localhost:3000/verificarMatricula/${matricula}`);
+    const data = await response.json();
+
+    if (response.ok) {
+      nomeUsuarioSpan.textContent = data.nome;
+      usuarioInfo.style.display = 'block';
+      divMatricula.style.display = 'none';
+    } else {
+      alert(data.error);
+    }
+  } catch (error) {
+    console.error('Erro ao verificar matrícula:', error);
+    alert('Ocorreu um erro ao verificar a matrícula.');
+  }
+});
 
 export async function carregarChaves() {
   try {
@@ -26,63 +129,63 @@ export async function carregarChaves() {
 }
 
 export async function carregarChavesLabs() {
-  const labGrid = document.getElementById('lab-grid');
-  const blocosGrid = document.getElementById('blocos-grid');
-  const btnVoltarBlocos = document.getElementById('btn-voltar-blocos');
-  const modalAutorizarEmprestimo = document.getElementById('modal-autorizar-emprestimo');
-
   function renderizarLabs(labs) {
-    labGrid.innerHTML = ''; // Limpa o conteúdo anterior
+    labGrid.innerHTML = '';
 
     labs.forEach(lab => {
       const labSquare = document.createElement('div');
       labSquare.classList.add('lab-square');
-      labSquare.textContent = lab.tag; // Adiciona o texto
-      labSquare.dataset.chave = lab.tag; // Armazena a tag
+      labSquare.textContent = lab.tag;
+      labSquare.dataset.chave = lab.tag;
 
-      // Adiciona classe de acordo com o status
       labSquare.classList.add(lab.status === 'Disponível' ? 'disponivel' : 'indisponivel');
-
-      labSquare.addEventListener('click', handleLabClick); // Adiciona evento de clique
-      labGrid.appendChild(labSquare); // Adiciona o quadrado ao grid
+      labSquare.addEventListener('click', handleLabClick);
+      labGrid.appendChild(labSquare);
     });
 
-    // Exibe o grid de laboratórios e oculta os blocos
     labGrid.style.display = 'grid';
     blocosGrid.style.display = 'none';
     btnVoltarBlocos.style.display = 'block';
   }
 
-  function handleLabClick(event) {
+  async function handleLabClick(event) {
+    const chaveSelecionada = event.target.dataset.chave;
     if (event.target.classList.contains('disponivel')) {
-      const chaveSelecionada = event.target.dataset.chave;
-      document.getElementById('chave-emprestimo').value = chaveSelecionada; // Preenche o campo oculto com a chave selecionada
-      modalAutorizarEmprestimo.style.display = 'flex'; // Abre o modal
-      // Event listener para fechar o modal ao clicar fora dele
-      window.addEventListener('click', (event) => {
-        if (event.target == modalAutorizarEmprestimo) {
-          modalAutorizarEmprestimo.style.display = 'none'; // Fecha o modal
+      document.getElementById('chave-emprestimo').value = chaveSelecionada;
+      modalEmprestimo.style.display = 'flex';
+    } else {
+      try {
+        const response = await fetch(`http://localhost:3000/emprestimos/${chaveSelecionada}`);
+        const data = await response.json();
+        if (response.ok) {
+          document.getElementById('chave-devolucao').value = chaveSelecionada;
+          document.getElementById('matricula-devolucao').value = data.matricula;
+          document.getElementById('info-usuario-devolucao').textContent = `Responsável: ${data.usuario}`;
+          modalDevolucao.style.display = 'flex';
+        } else {
+          alert(data.error);
         }
-      });
+      } catch (error) {
+        console.error('Erro ao buscar informações do empréstimo:', error);
+        alert('Ocorreu um erro ao buscar informações do empréstimo.');
+      }
     }
   }
 
-  // Event listener para o botão "Voltar para Blocos"
   btnVoltarBlocos.addEventListener('click', () => {
     labGrid.style.display = 'none';
     blocosGrid.style.display = 'grid';
     btnVoltarBlocos.style.display = 'none';
   });
 
-// Event listeners para os botões de bloco
-document.querySelectorAll('.bloco').forEach(button => {
+  document.querySelectorAll('.bloco').forEach(button => {
     button.addEventListener('click', async (event) => {
       const bloco = event.target.dataset.bloco;
       try {
         const response = await fetch(`http://localhost:3000/chaves`);
         const labs = await response.json();
         const labsBlocoSelecionado = labs.filter(lab => lab.bloco === bloco);
-        renderizarLabs(labsBlocoSelecionado); // Chama a função para renderizar os quadrados
+        renderizarLabs(labsBlocoSelecionado);
       } catch (error) {
         console.error('Erro ao carregar chaves laboratoriais:', error);
         alert('Ocorreu um erro ao carregar as chaves laboratoriais.');
@@ -90,7 +193,6 @@ document.querySelectorAll('.bloco').forEach(button => {
     });
   });
 }
-
 
 export async function carregarChavesDisponiveis() {
   try {
@@ -112,15 +214,8 @@ export async function carregarChavesDisponiveis() {
   }
 }
 
-// Event listeners
 document.addEventListener('DOMContentLoaded', () => {
   carregarChavesDisponiveis();
-  carregarChaves(); // Carrega todas as chaves na tabela
-  carregarChavesLabs(); // Carrega os quadrados dos laboratórios
+  carregarChaves();
+  carregarChavesLabs();
 });
-
-// Função para lidar com o clique nos laboratórios
-function handleLabClick(event) {
-  const chaveSelecionada = event.target.dataset.chave;
-  document.getElementById('chave-emprestimo').value = chaveSelecionada; // Preenche o campo oculto com a chave selecionada
-}

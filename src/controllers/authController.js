@@ -47,7 +47,26 @@ function autenticarToken(req, res, next) {
   });
 }
 
+async function verificarMatricula(req, res) {
+  const { matricula } = req.params;
+  
+  try {
+    const db = await conectar();
+    const usuario = await db.collection('externos').findOne({ matricula });
+
+    if (!usuario) {
+      return res.status(404).json({ error: 'Matrícula não encontrada' });
+    }
+
+    res.json({ nome: usuario.usuario });
+  } catch (error) {
+    console.error('Erro ao verificar matrícula:', error);
+    res.status(500).json({ error: 'Erro ao verificar matrícula' });
+  }
+}
+
 module.exports = {
   login,
-  autenticarToken
+  autenticarToken,
+  verificarMatricula
 };

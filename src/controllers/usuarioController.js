@@ -42,9 +42,8 @@ async function buscarUsuario(req, res) {
   }
 }
 
-// Função para cadastrar um novo usuário
 async function cadastrarUsuario(req, res) {
-  const { usuario, senha, cpf, email, tipo } = req.body;
+  const { usuario, senha, cpf, email, tipo, matriculaSiape } = req.body;
 
   try {
     const db = await conectar();
@@ -60,16 +59,14 @@ async function cadastrarUsuario(req, res) {
     const saltRounds = 10;
     const senhaHash = await bcrypt.hash(senha, saltRounds);
 
-    // Determina a coleção correta com base no tipo de usuário
-    const colecao = tipo === 'Externo' ? 'externos' : 'usuarios';
-
     // Insere o novo usuário na coleção correta
-    const result = await db.collection(colecao).insertOne({
+    const result = await db.collection('externos').insertOne({
       usuario,
       senha: senhaHash,
       cpf,
       email,
-      tipo
+      tipo,
+      matricula: matriculaSiape // Adiciona o campo matriculaSiape
     });
 
     res.status(201).json({
@@ -86,23 +83,23 @@ async function cadastrarUsuario(req, res) {
   }
 }
 
+
 // Função para atualizar um usuário existente
 async function atualizarUsuario(req, res) {
   const usuarioId = req.params.id;
-  const colecao = req.query.colecao;
-  const { usuario, senha, cpf, email, tipo } = req.body;
+  const { usuario, senha, cpf, email, matriculaSiape } = req.body;
 
   try {
     const db = await conectar();
-    
-    const updateData = { usuario, cpf, email, tipo };
+
+    const updateData = { usuario, cpf, email, matricula: matriculaSiape };
     if (senha) {
       // Criptografa a nova senha
       const saltRounds = 10;
       updateData.senha = await bcrypt.hash(senha, saltRounds);
     }
 
-    const result = await db.collection(colecao).updateOne(
+    const result = await db.collection('externos').updateOne(
       { _id: new mongodb.ObjectId(usuarioId) },
       { $set: updateData }
     );

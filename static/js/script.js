@@ -71,7 +71,7 @@ sidebar.addEventListener('click', (event) => {
         carregarChaves();
         break;
       case 'gerenciar-emprestimos':
-        carregarAutorizacoesPendentes(); // Chame a função
+        carregarChavesLabs; // Chame a função
         break;
       case 'historico':
         carregarHistorico();

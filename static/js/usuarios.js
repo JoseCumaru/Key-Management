@@ -28,33 +28,24 @@ export async function carregarUsuarios() {
   }
 }
 
-export function cadastrarUsuario() {
-  // Implementação do cadastro de usuário aqui
-}
-
 // Função para abrir o modal de edição e preencher os campos
-export async function abrirModalEditarUsuario(usuarioId, colecao) {
+export async function abrirModalEditarUsuario(usuarioId) {
   try {
-    const response = await fetch(`http://localhost:3000/usuarios/${usuarioId}?colecao=${colecao}`);
+    const response = await fetch(`http://localhost:3000/usuarios/${usuarioId}?colecao=externos`);
     if (!response.ok) {
       throw new Error('Usuário não encontrado');
     }
     const usuario = await response.json();
 
-    // Verifica se o elemento do modal existe antes de tentar acessá-lo
     const modalEditarUsuario = document.getElementById('modal-editar-usuario');
     if (modalEditarUsuario) {
-      // Preenche os campos do modal com os dados do usuário
       document.getElementById('editar-usuario').value = usuario.usuario;
       document.getElementById('editar-cpf').value = usuario.cpf;
       document.getElementById('editar-email').value = usuario.email;
-      document.getElementById('editar-tipo').value = usuario.tipo;
+      document.getElementById('editar-matricula').value = usuario.matricula || '';
 
-      // Define o ID e a coleção do usuário no formulário
       document.getElementById('form-editar-usuario').dataset.id = usuarioId;
-      document.getElementById('form-editar-usuario').dataset.colecao = colecao;
 
-      // Abre o modal de edição
       modalEditarUsuario.style.display = 'flex';
     } else {
       console.error('Elemento do modal não encontrado.');
@@ -66,10 +57,10 @@ export async function abrirModalEditarUsuario(usuarioId, colecao) {
   }
 }
 
-async function excluirUsuario(usuarioId, colecao) {
+async function excluirUsuario(usuarioId) {
   if (confirm(`Tem certeza que deseja excluir o usuário com ID ${usuarioId}?`)) {
     try {
-      const response = await fetch(`http://localhost:3000/usuarios/${usuarioId}?colecao=${colecao}`, {
+      const response = await fetch(`http://localhost:3000/usuarios/${usuarioId}?colecao=externos`, {
         method: 'DELETE'
       });
 
@@ -91,12 +82,10 @@ async function excluirUsuario(usuarioId, colecao) {
 usuariosTable.addEventListener('click', async (event) => {
   if (event.target.classList.contains('btn-editar')) {
     const usuarioId = event.target.dataset.id;
-    const colecao = event.target.dataset.colecao;
-    abrirModalEditarUsuario(usuarioId, colecao);
+    abrirModalEditarUsuario(usuarioId);
   } else if (event.target.classList.contains('btn-excluir')) {
     const usuarioId = event.target.dataset.id;
-    const colecao = event.target.dataset.colecao;
-    excluirUsuario(usuarioId, colecao);
+    excluirUsuario(usuarioId);
   }
 });
 
@@ -105,13 +94,12 @@ document.getElementById('form-editar-usuario').addEventListener('submit', async 
   event.preventDefault();
 
   const usuarioId = event.target.dataset.id;
-  const colecao = event.target.dataset.colecao;
 
   const usuario = {
     usuario: document.getElementById('editar-usuario').value,
     cpf: document.getElementById('editar-cpf').value,
     email: document.getElementById('editar-email').value,
-    tipo: document.getElementById('editar-tipo').value,
+    matriculaSiape: document.getElementById('editar-matricula').value,
   };
 
   if (document.getElementById('editar-senha').value) {
@@ -119,7 +107,7 @@ document.getElementById('form-editar-usuario').addEventListener('submit', async 
   }
 
   try {
-    const response = await fetch(`http://localhost:3000/usuarios/${usuarioId}?colecao=${colecao}`, {
+    const response = await fetch(`http://localhost:3000/usuarios/${usuarioId}?colecao=externos`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

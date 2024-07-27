@@ -11,7 +11,7 @@ const port = 3000;
 app.use(express.json());
 
 app.use(cors({
-  origin: 'http://127.0.0.1:5501',
+  origin: 'http://127.0.0.1:5500',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
@@ -37,7 +37,23 @@ app.post('/autorizarEmprestimo', emprestimoController.autorizarEmprestimo);
 app.post('/realizarEmprestimo', emprestimoController.realizarEmprestimo);
 app.get('/autorizacoesPendentes', emprestimoController.buscarAutorizacoesPendentes);
 app.get('/emprestimos', emprestimoController.buscarEmprestimos);
-app.post('/devolucao/:id', emprestimoController.registrarDevolucao);
+app.post('/devolucao', emprestimoController.registrarDevolucao);
+app.get('/verificarMatricula/:matricula', authController.verificarMatricula);
+app.get('/emprestimos/:chave', async (req, res) => {
+  try {
+    const db = await conectar();
+    const emprestimo = await db.collection('emprestimos').findOne({ tag: req.params.chave });
+
+    if (!emprestimo) {
+      return res.status(404).json({ error: 'Empréstimo não encontrado.' });
+    }
+
+    res.json(emprestimo);
+  } catch (error) {
+    console.error('Erro ao buscar informações do empréstimo:', error);
+    res.status(500).json({ error: 'Erro no servidor ao buscar informações do empréstimo.' });
+  }
+});
 
 // Rota para buscar histórico de empréstimos
 app.get('/historico', async (req, res) => {
@@ -82,8 +98,6 @@ app.get('/historico', async (req, res) => {
     res.status(500).json({ error: 'Erro ao carregar histórico de empréstimos' });
   }
 });
-
-
 
 app.listen(port, () => {
   console.log(`Servidor rodando em http://localhost:${port}`);
