@@ -97,9 +97,6 @@ async function buscarAutorizacoesPendentes(req, res){
     }
 
 }
-  
-
-
 
 
 // Função para buscar todos os empréstimos

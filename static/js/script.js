@@ -88,14 +88,10 @@ sidebar.addEventListener('click', (event) => {
   }
 });
 
-
-
 //     ---  Gerenciamento de Usuários ---
 const modalCadastrarUsuario = document.getElementById('modal-cadastrar-usuario');
 const btnFecharModal = document.querySelector('#modal-cadastrar-usuario .close-button');
-
 const btnAbrirModal = document.getElementById('btn-cadastrar-usuario');
-
 btnAbrirModal.addEventListener('click', () => {
   modalCadastrarUsuario.style.display = 'flex';
   document.getElementById('novo-usuario').value = '';
@@ -103,43 +99,6 @@ btnAbrirModal.addEventListener('click', () => {
 });
 btnFecharModal.addEventListener('click', () => {
   modalCadastrarUsuario.style.display = 'none';
-});
-
-
-
-// Adiciona evento de submit ao formulário de cadastro de usuário
-const formCadastrarUsuario = document.getElementById('form-cadastrar-usuario');
-
-formCadastrarUsuario.addEventListener('submit', async (event) => {
-  event.preventDefault();
-
-  const novoUsuario = document.getElementById('novo-usuario').value;
-  const novaSenha = document.getElementById('nova-senha').value;
-  const novoCpf = document.getElementById('novo-cpf').value;
-  const novoEmail = document.getElementById('novo-email').value;
-  const tipoUsuario = document.getElementById('tipo-usuario').value;
-
-  try {
-    const response = await fetch('http://localhost:3000/cadastrarUsuario', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ usuario: novoUsuario, senha: novaSenha, cpf: novoCpf, email: novoEmail, tipo: tipoUsuario })
-    });
-
-    if (response.ok) {
-      alert('Usuário cadastrado com sucesso!');
-      modalCadastrarUsuario.style.display = 'none';
-      carregarUsuarios();
-      formCadastrarUsuario.reset(); 
-    } else {
-      const errorData = await response.json();
-      alert(errorData.error); 
-    }
-
-  } catch (error) {
-    console.error('Erro ao cadastrar usuário:', error);
-    alert('Ocorreu um erro ao cadastrar o usuário.');
-  }
 });
 
 

@@ -6,23 +6,15 @@ const bcrypt = require('bcrypt');
 async function buscarUsuarios(req, res) {
   try {
     const db = await conectar();
-
-    // Buscar usuários da coleção 'usuarios'
-    const usuariosInternos = await db.collection('usuarios').find().toArray();
-
-    // Buscar usuários da coleção 'externos'
     const usuariosExternos = await db.collection('externos').find().toArray();
-
-    // Combinar os resultados
-    const todosUsuarios = usuariosInternos.concat(usuariosExternos);
-
-    res.json(todosUsuarios);
+    res.json(usuariosExternos);
   } catch (error) {
     console.error('Erro ao carregar usuários:', error);
     res.status(500).json({ error: 'Erro ao carregar usuários' });
   }
 }
 
+// Função para buscar um usuário específico
 async function buscarUsuario(req, res) {
   const usuarioId = req.params.id;
   const colecao = req.query.colecao;
@@ -42,14 +34,15 @@ async function buscarUsuario(req, res) {
   }
 }
 
+// Função para cadastrar um novo usuário
 async function cadastrarUsuario(req, res) {
   const { usuario, senha, cpf, email, tipo, matriculaSiape } = req.body;
 
   try {
     const db = await conectar();
 
-    // Verifica se o usuário já existe em qualquer coleção
-    const usuarioExistente = await db.collection('usuarios').findOne({ usuario }) || await db.collection('externos').findOne({ usuario });
+    // Verifica se o usuário já existe
+    const usuarioExistente = await db.collection('externos').findOne({ usuario });
 
     if (usuarioExistente) {
       return res.status(400).json({ error: 'Usuário já existe!' });
@@ -59,22 +52,32 @@ async function cadastrarUsuario(req, res) {
     const saltRounds = 10;
     const senhaHash = await bcrypt.hash(senha, saltRounds);
 
-    // Insere o novo usuário na coleção correta
-    const result = await db.collection('externos').insertOne({
+    // Cria um objeto para armazenar os dados do usuário
+    const novoUsuario = {
       usuario,
       senha: senhaHash,
       cpf,
       email,
-      tipo,
-      matricula: matriculaSiape // Adiciona o campo matriculaSiape
-    });
+      tipo
+    };
+
+    // Adiciona o campo "matricula" ou "siape" dependendo do tipo de usuário
+    if (tipo === 'Professor') {
+      novoUsuario.siape = matriculaSiape;
+    } else if (tipo === 'Aluno') {
+      novoUsuario.matricula = matriculaSiape;
+    }
+
+    // Insere o novo usuário na coleção 'externos'
+    const result = await db.collection('externos').insertOne(novoUsuario);
 
     res.status(201).json({
       message: 'Usuário cadastrado com sucesso!',
       usuario: {
         _id: result.insertedId,
         usuario,
-        tipo
+        tipo,
+        matriculaSiape: tipo === 'Professor' ? novoUsuario.siape : novoUsuario.matricula
       }
     });
   } catch (error) {

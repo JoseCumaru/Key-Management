@@ -224,7 +224,7 @@
                 <div id="modal-emprestimo" class="modal">
                     <div class="modal-content">
                         <span class="close">&times;</span>
-                        <h2>Realizar Empréstimo</h2>
+                        <h2 style="padding: 0; margin: 0;" >Realizar Empréstimo</h2>
                         <form id="form-emprestimo">
                             <div>
                                 <div id="matricula-emprestimo">
@@ -235,6 +235,7 @@
 
                             </div>
                             <div id="usuario-info" style="display: none;">
+                                <img src="../../static/img/perfil.png" style="width: 64px; align-self: center; padding: 20px;">
                                 <p>Nome: <span id="nome-usuario"></span></p>
                                 <label for="senha">Senha:</label>
                                 <input type="password" id="senha" name="senha" required>
@@ -248,8 +249,9 @@
                 <div id="modal-devolucao" class="modal">
                     <div class="modal-content">
                     <span class="close">&times;</span>
-                    <h2>Registrar Devolução</h2>
-                    <form id="form-devolucao">
+                    <h2 style="padding: 0; margin: 0;">Registrar Devolução</h2>
+                    <form id="form-devolucao" style="display: flex; flex-direction: column;">
+                        <img src="../../static/img/perfil.png" style="width: 64px; align-self: center; padding: 20px;">
                         <div id="info-usuario-devolucao"></div>
                         <div>
                         <label for="senha-devolucao">Senha:</label>
@@ -314,15 +316,14 @@
 
     </main>
 
+  
     <!-- Modal Cadastrar Usuário -->
     <div id="modal-cadastrar-usuario" class="modal">
         <div class="modal-content">
             <span class="close-button">×</span>
             <h2>Cadastrar Usuário</h2>
             <form id="form-cadastrar-usuario" class="form-modal">
-                <div id="adicionar-autorizacao-cadastro"
-                    style="background-color: #5cb85c; display: none; border-radius: 8px; width: 25px; height: 25px; align-self: end; text-align: center; align-content: center;">
-                    +</div>
+                <div id="adicionar-autorizacao-cadastro" style="background-color: #5cb85c; display: none; border-radius: 8px; width: 25px; height: 25px; align-self: end; text-align: center; align-content: center;">+</div>
                 <div>
                     <label for="novo-usuario">Nome:*</label>
                     <input autocomplete="off" type="text" id="novo-usuario" name="novo-usuario" required>
@@ -346,7 +347,7 @@
                         <option value="Professor">Professor</option>
                         <option value="Aluno">Aluno</option>
                     </select>
-                    <div id="matricula-siape-container" style="display: none;">
+                    <div id="matricula-siape-container">
                         <label for="matricula-siape" id="matricula-siape-label"></label>
                         <input type="text" id="nova-matricula-siape" name="matricula-siape" required>
                     </div>
@@ -354,8 +355,8 @@
                 <button type="submit" style="margin-top: 10px;">Cadastrar</button>
             </form>
         </div>
-        <script src="../../static/js/modalCadastro.js"></script>
     </div>
+    
     
 
 
@@ -365,6 +366,7 @@
         </div>
     </footer>
     <script type="module" src="../../static/js/script.js"></script>
+    <script type="module" src="../../static/js/modalCadastro.js"></script>
 </body>
 
 </html>
