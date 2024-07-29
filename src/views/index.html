@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão de Chaves - ICET</title>
+    <link rel="stylesheet" href="../../static/css/style.css">
+    <link rel="stylesheet" href="../../static/css/modal-cadastro.css">
+    <link rel="stylesheet" href="../../static/css/dashboard.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+</head>
+
+<body>
+    <header>
+        <div class="header-container">
+           <h3 class="header-title"> <i class='bx bx-key'></i> Gerenciamento de Chaves</h3>
+           
+        </div>
+    </header>
+
+
+    <main class="main-container">
+        <section id="login-section">
+            <h2>Usuário</h2>
+            <form id="login-form">        
+                    <input type="text" id="username" name="username" placeholder="Login" required>
+                    <input type="password" id="password" name="password" placeholder="Senha" required>
+                <button type="submit">Entrar</button>
+            </form>
+        </section>
+
+        <section id="main-section" style="display: none;">
+            <nav id="sidebar">
+                <ul>
+                    <li class="guardinha"><a href="#" id="btn-dashboard">Dashboard Guardinha</a></li>
+                    <li class="guardinha"><a href="#" id="btn-gerenciar-emprestimos">Gerenciar Empréstimo</a></li>
+                    <li class="guardinha"><a href="#" id="btn-registrar-devolucao-chaves">Registrar devolução de
+                            Chave</a></li>
+
+                    <li class="admin"><a href="#" id="btn-dashboard"><i class='bx bxs-dashboard' ></i> Dashboard Admin</a></li>
+                    <li class="admin"><a href="#" id="btn-usuarios"><i class='bx bx-user' ></i>Gerenciar Usuários</a></li>
+                    <li class="admin"><a href="#" id="btn-gerenciar-chaves"><i class='bx bxs-key' ></i>Gerenciar Chaves</a></li>
+                    <li class="admin"><a href="#" id="btn-historico"><i class='bx bx-book-open'></i>Histórico de emprestimos</a></li>
+                    <li><a href="#" id="btn-logout"><i class='bx bx-exit'></i>Sair</a></li>
+                </ul>
+            </nav>
+
+            <div id="content">
+                <div id="dashboard" class="content-section">
+                    <h2>Dashboard</h2>
+                    <p>Bem-vindo ao Sistema de Gestão de Chaves!</p>
+                </div>
+
+                <div id="chaves" class="content-section">
+                    <h2>Visualizar Chaves</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Tag</th>
+                                <th>Descrição</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="usuarios" class="content-section admin">
+                    <h2>Gerenciar Usuários</h2>
+                    <div class="chaves-header">
+                        <div class="buscar-input"><input type="text"><i class='bx bx-search-alt-2' ></i></div>
+                        <button><i class='bx bx-add-to-queue'></i></button>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>CPF</th>
+                                <th>Email</th>
+                                <th>Tipo</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+
+                
+                <div id="modal-editar-usuario" class="modal">
+                    <div class="modal-content">
+                      <span class="close-button" onclick="document.getElementById('modal-editar-usuario').style.display='none';">&times;</span>
+                      <h2>Editar Usuário</h2>
+                      <form id="form-editar-usuario" class="form-modal">
+                        <div>
+                          <label for="editar-usuario">Usuário:</label>
+                          <input type="text" id="editar-usuario" name="usuario" required>
+                        </div>
+                        <div>
+                          <label for="editar-cpf">CPF:</label>
+                          <input type="text" id="editar-cpf" name="cpf" required>
+                        </div>
+                        <div>
+                          <label for="editar-email">Email:</label>
+                          <input type="email" id="editar-email" name="email" required>
+                        </div>
+                        <div id="matricula-siape-container">
+                          <label for="editar-matricula" id="editar-matricula-label">Matrícula:</label>
+                          <input type="text" id="editar-matricula" name="matricula">
+                        </div>
+                        <div>
+                          <label for="editar-senha">Senha:</label>
+                          <input type="password" id="editar-senha" name="senha">
+                        </div>
+                        <button type="submit">Salvar</button>
+                      </form>
+                    </div>
+                  </div>
+                  
+                
+
+
+
+
+                <div id="gerenciar-chaves" class="content-section admin">
+                    <h2>Gerenciar Chaves</h2>
+                 
+                    <div class="chaves-content">
+                        <div class="blocos-agroup">
+                            <div class="bloco-card">
+                                <div class="icon"><i class='bx bx-key'></i></div>
+                                <div class="text">
+                                    <p class="title">Bloco A</p>
+                                    <p class="descricao">Salas e etc e os caralho a quatro</p>
+                                </div>
+                            </div>
+                            <div class="bloco-card">
+                                <div class="icon"><i class='bx bx-key'></i></div>
+                                <div class="text">
+                                    <p class="title">Bloco A</p>
+                                    <p class="descricao">Salas e etc e os caralho a quatro</p>
+                                </div>
+                            </div>
+                            <div class="bloco-card">
+                                <div class="icon"><i class='bx bx-key'></i></div>
+                                <div class="text">
+                                    <p class="title">Bloco A</p>
+                                    <p class="descricao">Salas e etc e os caralho a quatro</p>
+                                </div>
+                            </div>
+                            <div class="bloco-card">
+                                <div class="icon"><i class='bx bx-key'></i></div>
+                                <div class="text">
+                                    <p class="title">Bloco A</p>
+                                    <p class="descricao">Salas e etc e os caralho a quatro</p>
+                                </div>
+                            </div>
+                            <div class="bloco-card">
+                                <div class="icon"><i class='bx bx-key'></i></div>
+                                <div class="text">
+                                    <p class="title">Bloco A</p>
+                                    <p class="descricao">Salas e etc e os caralho a quatro</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  
+                </div>
+
+                <!-- Onde o guardinha registra a devolucao da chave -->
+                <div id="registrar-devolucao-chaves" class="content-section admin">
+                    <h2>Registrar devolução</h2>
+                    <div id="div-filtrar-devolucao" class="filtro-div">
+                        <div>
+                            <label for="usuario-filtro">Nome:</label>
+                            <input type="text" id="nome-devolucao-filtro" class="filtro-input">
+                        </div>
+                        <div>
+                            <label for="data-inicio-filtro">Data:</label>
+                            <input type="text" id="data-devolucao-filtro" class="filtro-input">
+                        </div>
+                        <button id="btn-filtrar-devolucao" class="filtro-button">Filtrar</button>
+                    </div>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Tag</th>
+                                <th>Data de emprestimo</th>
+                                <th>Responsável</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Onde o guardinha pode verificar todas as autorizaçoes -->
+                <div id="gerenciar-emprestimos" class="content-section">
+                    <h2>Gerenciar Empréstimo</h2>
+
+                    <div id="autorizar-emprestimo">
+                        <div>
+                            <label for="chave-emprestimo">Blocos:</label>
+                            <div id="blocos-grid" class="grid-container">
+                                <button class="grid-item bloco" data-bloco="A">Bloco A</button>
+                                <button class="grid-item bloco" data-bloco="B">Bloco B</button>
+                                <button class="grid-item bloco" data-bloco="C">Bloco C</button>
+                                <button class="grid-item bloco" data-bloco="D">Bloco D</button>
+                                <button class="grid-item bloco" data-bloco="E">Bloco E</button>
+                                <button class="grid-item bloco" data-bloco="F">Bloco F</button>
+                            </div>
+                            <button type="button" id="btn-voltar-blocos" style="display: none;">Voltar para
+                                Blocos</button>
+                            <div id="lab-grid" class="grid-container" style="display: none;">
+                                <!-- Os laboratórios serão inseridos aqui dinamicamente via JavaScript -->
+                            </div>
+                        </div>
+                        <input type="hidden" id="chave-emprestimo" name="chave-emprestimo" required>
+                    </div>
+                </div>
+
+                <!-- Modal para o guardinha realizar os emprestimos -->
+                <div id="modal-emprestimo" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h2>Realizar Empréstimo</h2>
+                        <form id="form-emprestimo">
+                            <div>
+                                <div id="matricula-emprestimo">
+                                    <label for="matricula">Matrícula:</label>
+                                    <input type="text" id="matricula" name="matricula" required>
+                                    <button type="button" id="verificar-matricula">Verificar Matrícula</button>
+                                </div>
+
+                            </div>
+                            <div id="usuario-info" style="display: none;">
+                                <p>Nome: <span id="nome-usuario"></span></p>
+                                <label for="senha">Senha:</label>
+                                <input type="password" id="senha" name="senha" required>
+                                <button type="submit">Emprestar Chave</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Modal de Devolução -->
+                <div id="modal-devolucao" class="modal">
+                    <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h2>Registrar Devolução</h2>
+                    <form id="form-devolucao">
+                        <div id="info-usuario-devolucao"></div>
+                        <div>
+                        <label for="senha-devolucao">Senha:</label>
+                        <input type="password" id="senha-devolucao" name="senha-devolucao" required>
+                        </div>
+                        <input type="hidden" id="chave-devolucao" name="chave-devolucao">
+                        <input type="hidden" id="matricula-devolucao" name="matricula-devolucao">
+                        <button type="submit">Confirmar Devolução</button>
+                    </form>
+                    </div>
+                </div>
+
+
+                <!-- Historico de todos os emprestimos -->
+                <div id="historico" class="content-section admin">
+                    <h2>Registro de Emprestimos</h2>
+
+
+                    <div id="div-filtrar" class="filtro-div">
+
+                        <div>
+                            <label for="responsavel-filtro">Responsável:</label>
+                            <input type="text" id="responsavel-filtro" class="filtro-input">
+                        </div>
+                        <div>
+                            <label for="data-inicio-filtro">Data de Início:</label>
+                            <input type="date" id="data-inicio-filtro" class="filtro-input">
+                        </div>
+                        <div>
+                            <label for="data-fim-filtro">Data de Fim:</label>
+                            <input type="date" id="data-fim-filtro" class="filtro-input">
+                        </div>
+
+                        <button id="btn-filtrar-historico">Filtrar</button>
+
+
+
+                    </div>
+
+                    <div class="historico-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Tag</th>
+                                    <th>Responsável</th>
+                                    <th>Data de emprestimo</th>
+                                    <th>Data de devoluçao</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="extern-paginacao">
+                        <div id="paginacao"></div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+   
+        </div>
+        <script src="../../static/js/modalCadastro.js"></script>
+    </div>
+    
+    <script type="module" src="../../static/js/script.js"></script>
+</body>
+
+</html>
