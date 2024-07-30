@@ -48,6 +48,9 @@ formEmprestimo.addEventListener('submit', async (event) => {
 
     if (response.ok) {
       alert('Empréstimo realizado com sucesso!');
+      labGrid.style.display = 'none';
+      blocosGrid.style.display = 'grid';
+      btnVoltarBlocos.style.display = 'none';
       fecharModal(modalEmprestimo);
     } else {
       const errorData = await response.json();
@@ -74,6 +77,9 @@ formDevolucao.addEventListener('submit', async (event) => {
 
     if (response.ok) {
       alert('Devolução registrada com sucesso!');
+      labGrid.style.display = 'none';
+      blocosGrid.style.display = 'grid';
+      btnVoltarBlocos.style.display = 'none';
       fecharModal(modalDevolucao);
     } else {
       const errorData = await response.json();
@@ -94,7 +100,8 @@ verificarMatriculaBtn.addEventListener('click', async () => {
 
     if (response.ok) {
       nomeUsuarioSpan.textContent = data.nome;
-      usuarioInfo.style.display = 'block';
+      usuarioInfo.style.display = 'flex';
+      usuarioInfo.style.flexDirection = 'column';
       divMatricula.style.display = 'none';
     } else {
       alert(data.error);
@@ -129,7 +136,7 @@ export async function carregarChaves() {
 }
 
 export async function carregarChavesLabs() {
-  function renderizarLabs(labs) {
+  async function renderizarLabs(labs) {
     labGrid.innerHTML = '';
 
     labs.forEach(lab => {
@@ -185,7 +192,7 @@ export async function carregarChavesLabs() {
         const response = await fetch(`http://localhost:3000/chaves`);
         const labs = await response.json();
         const labsBlocoSelecionado = labs.filter(lab => lab.bloco === bloco);
-        renderizarLabs(labsBlocoSelecionado);
+        await renderizarLabs(labsBlocoSelecionado);  // Aguarda renderizarLabs ser concluída
       } catch (error) {
         console.error('Erro ao carregar chaves laboratoriais:', error);
         alert('Ocorreu um erro ao carregar as chaves laboratoriais.');
