@@ -17,6 +17,7 @@ export async function carregarUsuarios() {
         <td>${usuario.tipo}</td>
         <td>
           <button class="btn-editar" data-id="${usuario._id}" data-colecao="${usuario.tipo === 'Externo' ? 'externos' : 'usuarios'}"><i class='bx bx-edit'></i></button>
+          <button class="btn-adicionar-autorização" data-id="${usuario._id}" data-colecao="${usuario.tipo === 'Externo' ? 'externos' : 'usuarios'}"><i class='bx bx-key'></i></button>
           <button class="btn-excluir" data-id="${usuario._id}" data-colecao="${usuario.tipo === 'Externo' ? 'externos' : 'usuarios'}"><i class='bx bx-trash'></i></button>
         </td>
       `;
