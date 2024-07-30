@@ -8,31 +8,25 @@
     <link rel="stylesheet" href="../../static/css/style.css">
     <link rel="stylesheet" href="../../static/css/modal-cadastro.css">
     <link rel="stylesheet" href="../../static/css/dashboard.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
 </head>
 
 <body>
     <header>
         <div class="header-container">
-            <h3>Gestão de Chaves</h3>
-            <h4><img src="../../static/img/ufam.png" alt="Logo do Instituto de Ciências Exatas e Tecnologia"
-                    id="logo">INSTITUTO DE CIÊNCIAS EXATAS E TECNOLOGIA</h4>
-
+           <h3 class="header-title"> <i class='bx bx-key'></i> Gerenciamento de Chaves</h3>
+           
         </div>
     </header>
 
 
     <main class="main-container">
         <section id="login-section">
-            <h2>Login</h2>
-            <form id="login-form">
-                <div>
-                    <label for="username">Usuário:</label>
-                    <input type="text" id="username" name="username" required>
-                </div>
-                <div>
-                    <label for="password">Senha:</label>
-                    <input type="password" id="password" name="password" required>
-                </div>
+            <h2>Usuário</h2>
+            <form id="login-form">        
+                    <input type="text" id="username" name="username" placeholder="Login" required>
+                    <input type="password" id="password" name="password" placeholder="Senha" required>
                 <button type="submit">Entrar</button>
             </form>
         </section>
@@ -45,11 +39,11 @@
                     <li class="guardinha"><a href="#" id="btn-registrar-devolucao-chaves">Registrar devolução de
                             Chave</a></li>
 
-                    <li class="admin"><a href="#" id="btn-dashboard">Dashboard Admin</a></li>
-                    <li class="admin"><a href="#" id="btn-usuarios">Gerenciar Usuários</a></li>
-                    <li class="admin"><a href="#" id="btn-gerenciar-chaves">Gerenciar Chaves</a></li>
-                    <li class="admin"><a href="#" id="btn-historico">Histórico de emprestimos</a></li>
-                    <li><a href="#" id="btn-logout">Sair</a></li>
+                    <li class="admin"><a href="#" id="btn-dashboard"><i class='bx bxs-dashboard' ></i> Dashboard Admin</a></li>
+                    <li class="admin"><a href="#" id="btn-usuarios"><i class='bx bx-user' ></i>Gerenciar Usuários</a></li>
+                    <li class="admin"><a href="#" id="btn-gerenciar-chaves"><i class='bx bxs-key' ></i>Gerenciar Chaves</a></li>
+                    <li class="admin"><a href="#" id="btn-historico"><i class='bx bx-book-open'></i>Histórico de emprestimos</a></li>
+                    <li><a href="#" id="btn-logout"><i class='bx bx-exit'></i>Sair</a></li>
                 </ul>
             </nav>
 
@@ -76,18 +70,9 @@
 
                 <div id="usuarios" class="content-section admin">
                     <h2>Gerenciar Usuários</h2>
-                    <button id="btn-cadastrar-usuario">Cadastrar Usuário</button>
-
-                    <div id="div-filtrar-usuarios" class="filtro-div">
-                        <div>
-                            <label for="usuario-filtro">Nome:</label>
-                            <input type="text" id="usuario-filtro" class="filtro-input">
-                        </div>
-                        <div>
-                            <label for="data-inicio-filtro">Matricula:</label>
-                            <input type="text" id="matricula-filtro" class="filtro-input">
-                        </div>
-                        <button id="btn-filtrar-usuario" class="filtro-button">Filtrar</button>
+                    <div class="chaves-header">
+                        <div class="buscar-input"><input type="text"><i class='bx bx-search-alt-2' ></i></div>
+                        <button id="btn-cadastrar-usuario"><i class='bx bx-add-to-queue'></i></button>
                     </div>
                     <table>
                         <thead>
@@ -104,81 +89,130 @@
                     </table>
                 </div>
 
-                
-                <div id="modal-editar-usuario" class="modal">
-                    <div class="modal-content">
-                      <span class="close-button" onclick="document.getElementById('modal-editar-usuario').style.display='none';">&times;</span>
-                      <h2>Editar Usuário</h2>
-                      <form id="form-editar-usuario" class="form-modal">
-                        <div>
-                          <label for="editar-usuario">Usuário:</label>
-                          <input type="text" id="editar-usuario" name="usuario" required>
-                        </div>
-                        <div>
-                          <label for="editar-cpf">CPF:</label>
-                          <input type="text" id="editar-cpf" name="cpf" required>
-                        </div>
-                        <div>
-                          <label for="editar-email">Email:</label>
-                          <input type="email" id="editar-email" name="email" required>
-                        </div>
-                        <div id="matricula-siape-container">
-                          <label for="editar-matricula" id="editar-matricula-label">Matrícula:</label>
-                          <input type="text" id="editar-matricula" name="matricula">
-                        </div>
-                        <div>
-                          <label for="editar-senha">Senha:</label>
-                          <input type="password" id="editar-senha" name="senha">
-                        </div>
-                        <button type="submit">Salvar</button>
-                      </form>
+    <!-- Modal Cadastrar Usuário -->
+    <div id="modal-cadastrar-usuario" class="modal">
+        <div class="modal-content">
+            <span class="close-button">×</span>
+            <h2>Cadastrar Usuário</h2>
+            <form id="form-cadastrar-usuario" class="form-modal">
+                <div id="adicionar-autorizacao-cadastro" style="background-color: #5cb85c; display: none; border-radius: 8px; width: 25px; height: 25px; align-self: end; text-align: center; align-content: center;">+</div>
+                <div>
+                    <label for="novo-usuario">Nome:*</label>
+                    <input autocomplete="off" type="text" id="novo-usuario" name="novo-usuario" required>
+                </div>
+                <div>
+                    <label for="nova-senha">Senha:*</label>
+                    <input autocomplete="off" type="password" id="nova-senha" name="nova-senha" required>
+                </div>
+                <div>
+                    <label for="novo-email">Email:</label>
+                    <input type="email" id="novo-email" name="novo-email" required>
+                </div>
+                <div>
+                    <label for="novo-cpf">CPF:</label>
+                    <input type="text" id="novo-cpf" name="novo-cpf" required>
+                </div>
+                <div>
+                    <label for="tipo-usuario">Tipo:*</label>
+                    <select id="tipo-usuario" name="tipo-usuario" onchange="mostrarCampo()">
+                        <option value="none"></option>
+                        <option value="Professor">Professor</option>
+                        <option value="Aluno">Aluno</option>
+                    </select>
+                    <div id="matricula-siape-container">
+                        <label for="matricula-siape" id="matricula-siape-label"></label>
+                        <input type="text" id="nova-matricula-siape" name="matricula-siape" required>
                     </div>
-                  </div>
-                  
-                
+                </div>
+                <button type="submit" style="margin-top: 10px;">Cadastrar</button>
+            </form>
+        </div>
+    </div>
 
+                
+    <div id="modal-editar-usuario" class="modal">
+        <div class="modal-content">
+          <span class="close-button" onclick="document.getElementById('modal-editar-usuario').style.display='none';">&times;</span>
+          <h2>Editar Usuário</h2>
+          <form id="form-editar-usuario" class="form-modal">
+            <div>
+              <label for="editar-usuario">Usuário:</label>
+              <input type="text" id="editar-usuario" name="usuario" required>
+            </div>
+            <div>
+              <label for="editar-cpf">CPF:</label>
+              <input type="text" id="editar-cpf" name="cpf" required>
+            </div>
+            <div>
+              <label for="editar-email">Email:</label>
+              <input type="email" id="editar-email" name="email" required>
+            </div>
+            <div id="matricula-siape-container">
+              <label for="editar-matricula" id="editar-matricula-label">Matrícula:</label>
+              <input type="text" id="editar-matricula" name="matricula">
+            </div>
+            <div>
+              <label for="editar-senha">Senha:</label>
+              <input type="password" id="editar-senha" name="senha">
+            </div>
+            <button type="submit">Salvar</button>
+          </form>
+        </div>
+      </div>
+                  
 
 
 
                 <div id="gerenciar-chaves" class="content-section admin">
                     <h2>Gerenciar Chaves</h2>
-                    <button id="btn-cadastrar-chave">Cadastrar Chave</button>
-
-                    <div id="div-filtrar-chaves" class="filtro-div">
-                        <div>
-                            <label for="chave-filtro">Chave:</label>
-                            <input type="text" id="chave-filtro" class="filtro-input">
+                 
+                    <div class="chaves-content">
+                        <div class="blocos-agroup">
+                            <div class="bloco-card">
+                                <div class="icon"><i class='bx bx-key'></i></div>
+                                <div class="text">
+                                    <p class="title">Bloco A</p>
+                                    <p class="descricao">Salas e etc e os caralho a quatro</p>
+                                </div>
+                            </div>
+                            <div class="bloco-card">
+                                <div class="icon"><i class='bx bx-key'></i></div>
+                                <div class="text">
+                                    <p class="title">Bloco A</p>
+                                    <p class="descricao">Salas e etc e os caralho a quatro</p>
+                                </div>
+                            </div>
+                            <div class="bloco-card">
+                                <div class="icon"><i class='bx bx-key'></i></div>
+                                <div class="text">
+                                    <p class="title">Bloco B</p>
+                                    <p class="descricao">Salas e etc e os caralho a quatro</p>
+                                </div>
+                            </div>
+                            <div class="bloco-card">
+                                <div class="icon"><i class='bx bx-key'></i></div>
+                                <div class="text">
+                                    <p class="title">Bloco C</p>
+                                    <p class="descricao">Salas e etc e os caralho a quatro</p>
+                                </div>
+                            </div>
+                            <div class="bloco-card">
+                                <div class="icon"><i class='bx bx-key'></i></div>
+                                <div class="text">
+                                    <p class="title">Bloco D</p>
+                                    <p class="descricao">Salas e etc e os caralho a quatro</p>
+                                </div>
+                            </div>
                         </div>
-
-                        <button id="btn-filtrar-chave" class="filtro-button">Filtrar</button>
                     </div>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Tag</th>
-                                <th>Descrição</th>
-                                <th>Status</th>
-                                <th>Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
+                  
                 </div>
 
                 <!-- Onde o guardinha registra a devolucao da chave -->
                 <div id="registrar-devolucao-chaves" class="content-section admin">
                     <h2>Registrar devolução</h2>
-                    <div id="div-filtrar-devolucao" class="filtro-div">
-                        <div>
-                            <label for="usuario-filtro">Nome:</label>
-                            <input type="text" id="nome-devolucao-filtro" class="filtro-input">
-                        </div>
-                        <div>
-                            <label for="data-inicio-filtro">Data:</label>
-                            <input type="text" id="data-devolucao-filtro" class="filtro-input">
-                        </div>
-                        <button id="btn-filtrar-devolucao" class="filtro-button">Filtrar</button>
+                    <div class="chaves-header">
+                        <div class="buscar-input"><input type="text"><i class='bx bx-search-alt-2' ></i></div>
                     </div>
 
                     <table>
@@ -203,14 +237,14 @@
                         <div>
                             <label for="chave-emprestimo">Blocos:</label>
                             <div id="blocos-grid" class="grid-container">
-                                <button class="grid-item bloco" data-bloco="A">Bloco A</button>
-                                <button class="grid-item bloco" data-bloco="B">Bloco B</button>
-                                <button class="grid-item bloco" data-bloco="C">Bloco C</button>
-                                <button class="grid-item bloco" data-bloco="D">Bloco D</button>
-                                <button class="grid-item bloco" data-bloco="E">Bloco E</button>
-                                <button class="grid-item bloco" data-bloco="F">Bloco F</button>
+                                <button class="grid-item bloco" data-bloco="A"><div class="icon"><i class='bx bx-key'></i></div>Bloco A</button>
+                                <button class="grid-item bloco" data-bloco="B"><div class="icon"><i class='bx bx-key'></i></div>Bloco B</button>
+                                <button class="grid-item bloco" data-bloco="C"><div class="icon"><i class='bx bx-key'></i></div>Bloco C</button>
+                                <button class="grid-item bloco" data-bloco="D"><div class="icon"><i class='bx bx-key'></i></div>Bloco D</button>
+                                <button class="grid-item bloco" data-bloco="E"><div class="icon"><i class='bx bx-key'></i></div>Bloco E</button>
+                                <button class="grid-item bloco" data-bloco="F"><div class="icon"><i class='bx bx-key'></i></div>Bloco F</button>
                             </div>
-                            <button type="button" id="btn-voltar-blocos" style="display: none;">Voltar para
+                            <button type="button" id="btn-voltar-blocos" style="display: none; border-radius: 6px;">Voltar para
                                 Blocos</button>
                             <div id="lab-grid" class="grid-container" style="display: none;">
                                 <!-- Os laboratórios serão inseridos aqui dinamicamente via JavaScript -->
@@ -235,7 +269,7 @@
 
                             </div>
                             <div id="usuario-info" style="display: none;">
-                                <img src="../../static/img/perfil.png" style="width: 64px; align-self: center; padding: 20px;">
+                                <img src="../../static/img/ufam.png" style="width: 64px; align-self: center; padding: 20px;">
                                 <p>Nome: <span id="nome-usuario"></span></p>
                                 <label for="senha">Senha:</label>
                                 <input type="password" id="senha" name="senha" required>
@@ -249,9 +283,8 @@
                 <div id="modal-devolucao" class="modal">
                     <div class="modal-content">
                     <span class="close">&times;</span>
-                    <h2 style="padding: 0; margin: 0;">Registrar Devolução</h2>
-                    <form id="form-devolucao" style="display: flex; flex-direction: column;">
-                        <img src="../../static/img/perfil.png" style="width: 64px; align-self: center; padding: 20px;">
+                    <h2>Registrar Devolução</h2>
+                    <form id="form-devolucao">
                         <div id="info-usuario-devolucao"></div>
                         <div>
                         <label for="senha-devolucao">Senha:</label>
@@ -316,55 +349,10 @@
 
     </main>
 
-  
-    <!-- Modal Cadastrar Usuário -->
-    <div id="modal-cadastrar-usuario" class="modal">
-        <div class="modal-content">
-            <span class="close-button">×</span>
-            <h2>Cadastrar Usuário</h2>
-            <form id="form-cadastrar-usuario" class="form-modal">
-                <div id="adicionar-autorizacao-cadastro" style="background-color: #5cb85c; display: none; border-radius: 8px; width: 25px; height: 25px; align-self: end; text-align: center; align-content: center;">+</div>
-                <div>
-                    <label for="novo-usuario">Nome:*</label>
-                    <input autocomplete="off" type="text" id="novo-usuario" name="novo-usuario" required>
-                </div>
-                <div>
-                    <label for="nova-senha">Senha:*</label>
-                    <input autocomplete="off" type="password" id="nova-senha" name="nova-senha" required>
-                </div>
-                <div>
-                    <label for="novo-email">Email:</label>
-                    <input type="email" id="novo-email" name="novo-email" required>
-                </div>
-                <div>
-                    <label for="novo-cpf">CPF:</label>
-                    <input type="text" id="novo-cpf" name="novo-cpf" required>
-                </div>
-                <div>
-                    <label for="tipo-usuario">Tipo:*</label>
-                    <select id="tipo-usuario" name="tipo-usuario" onchange="mostrarCampo()">
-                        <option value="none"></option>
-                        <option value="Professor">Professor</option>
-                        <option value="Aluno">Aluno</option>
-                    </select>
-                    <div id="matricula-siape-container">
-                        <label for="matricula-siape" id="matricula-siape-label"></label>
-                        <input type="text" id="nova-matricula-siape" name="matricula-siape" required>
-                    </div>
-                </div>
-                <button type="submit" style="margin-top: 10px;">Cadastrar</button>
-            </form>
+   
         </div>
     </div>
     
-    
-
-
-    <footer>
-        <div class="footer-container">
-            <p>© 2024 - ICET</p>
-        </div>
-    </footer>
     <script type="module" src="../../static/js/script.js"></script>
     <script type="module" src="../../static/js/modalCadastro.js"></script>
 </body>

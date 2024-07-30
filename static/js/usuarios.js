@@ -16,8 +16,8 @@ export async function carregarUsuarios() {
         <td>${usuario.email}</td>
         <td>${usuario.tipo}</td>
         <td>
-          <button class="btn-editar" data-id="${usuario._id}" data-colecao="${usuario.tipo === 'Externo' ? 'externos' : 'usuarios'}">Editar</button>
-          <button class="btn-excluir" data-id="${usuario._id}" data-colecao="${usuario.tipo === 'Externo' ? 'externos' : 'usuarios'}">Excluir</button>
+          <button class="btn-editar" data-id="${usuario._id}" data-colecao="${usuario.tipo === 'Externo' ? 'externos' : 'usuarios'}"><i class='bx bx-edit'></i></button>
+          <button class="btn-excluir" data-id="${usuario._id}" data-colecao="${usuario.tipo === 'Externo' ? 'externos' : 'usuarios'}"><i class='bx bx-trash'></i></button>
         </td>
       `;
       usuariosTable.appendChild(linha);

@@ -13,10 +13,10 @@ document.addEventListener('DOMContentLoaded', function () {
         const matriculaSiapeLabel = document.getElementById('matricula-siape-label');
 
         if (tipoUser === 'Professor') {
-            //matriculaSiapeContainer.style.display = 'block';
+            matriculaSiapeContainer.style.display = 'block';
             matriculaSiapeLabel.textContent = 'SIAPE:';
         } else if (tipoUser === 'Aluno') {
-            //matriculaSiapeContainer.style.display = 'block';
+            matriculaSiapeContainer.style.display = 'block';
             matriculaSiapeLabel.textContent = 'Matrícula:';
         } else {
             matriculaSiapeContainer.style.display = 'none';

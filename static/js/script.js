@@ -101,14 +101,10 @@ btnFecharModal.addEventListener('click', () => {
   modalCadastrarUsuario.style.display = 'none';
 });
 
-
-
 function handleLabClick(event) {
   const chaveSelecionada = event.target.dataset.chave;
   document.getElementById('chave-emprestimo').value = chaveSelecionada; 
 }
-
-
 
 
 // --- Inicializações ---

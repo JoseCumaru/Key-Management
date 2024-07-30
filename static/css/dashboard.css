@@ -1,61 +1,63 @@
   /* Seção Principal */
   #main-section {
-    height: 100%;
+    width: 100%;
     display: flex;
   }
-  
+
   #sidebar {
-    border-top-left-radius: 8px;
-    border-bottom-left-radius: 8px;
     width: 20%;
-    background-color: #244f90;
-    color: #fff;
     padding: 20px;
   }
-  
+
   #sidebar ul {
     list-style: none;
-    padding: 0;
-    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap:1rem;
   }
-  
+
   #sidebar li a {
     display: block;
     padding: 10px;
     text-decoration: none;
-    color: #fff;
+    color: #000;
+    background-color: #fff;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: all 0.5s ease-out;
   }
-  
-  #sidebar li a:hover {
-    background-color: #86ace687;
-    width: 100%;
+
+  #sidebar li a:hover{
+    box-shadow: 6px 6px 20px #ccc;
   }
-  
+
+
   /* Conteúdo */
   #content {
     width: 80%;
     padding: 20px;
-    background-color: #86ace687;
     border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
-    
+
   }
-  
+
   .content-section {
     display: none;
     height: 100%;
   }
-  
+
   .content-section h2 {
     margin-top: 0;
   }
-  
+
   /* Formulários */
   .content-section form label {
     display: block;
     margin-bottom: 5px;
   }
-  
+
   .content-section form input[type="text"],
   .content-section form input[type="password"],
   .content-section form select {
@@ -65,7 +67,7 @@
     border-radius: 3px;
     border: 1px solid #ddd;
   }
-  
+
   .content-section form button {
     padding: 10px 20px;
     background-color: #5cb85c;
@@ -75,9 +77,9 @@
     cursor: pointer;
   }
 
-  button{
+  #login-section button {
     padding: 5px 20px;
-    background-color: #282F3C;
+    background-color: #0073ff;
     color: #fff;
     border: none;
     border-radius: 3px;
@@ -92,25 +94,28 @@
     border-radius: 3px;
     cursor: pointer;
   }
-  
-  
-    /* Historico */
-    #historico h2{
-      height: 5%;
-    }
-    #div-filtrar{
-      height: 10%;
-    }
-    .historico-table{
-      height: 70%;
-    }
-    #extern-paginacao{
-      height: 5%;
-    }
-    
-    
-    
-  
+
+
+  /* Historico */
+  #historico h2 {
+    height: 5%;
+  }
+
+  #div-filtrar {
+    height: 10%;
+  }
+
+  .historico-table {
+    height: 70%;
+  }
+
+  #extern-paginacao {
+    height: 5%;
+  }
+
+
+
+
 
   /* Tabelas */
   .content-section table {
@@ -119,55 +124,57 @@
     margin-top: 20px;
   }
 
-  #div-filtrar-usuarios{
+  #div-filtrar-usuarios {
     display: flex;
     flex-direction: row;
     gap: 10px;
     float: inline-end;
   }
 
-  #div-filtrar-usuarios input{
+  #div-filtrar-usuarios input {
     padding: 5px 20px;
   }
 
 
-  #div-filtrar-chaves{
+  #div-filtrar-chaves {
     display: flex;
     flex-direction: row;
     gap: 10px;
     float: inline-end;
   }
 
-  #div-filtrar-chaves input{
+  #div-filtrar-chaves input {
     padding: 5px 20px;
   }
 
-  #div-filtrar{
+  #div-filtrar {
     display: flex;
     flex-direction: row;
     gap: 10px;
   }
 
-  #div-filtrar input{
+  #div-filtrar input {
     padding: 5px 20px;
   }
 
-  .filtro-div{
+  .filtro-div {
     display: flex;
     flex-direction: row;
     gap: 10px;
     justify-content: flex-end;
   }
 
-  .filtro-div input{
+  .filtro-div input {
     padding: 5px 20px;
     border-radius: 4px;
   }
 
-  .content-section{ height: 100%;}
+  .content-section {
+    height: 100%;
+  }
 
 
-  
+
   .content-section th,
   .content-section td {
     text-align: left;
@@ -175,18 +182,95 @@
     border-bottom: 1px solid #ddd;
   }
 
-  #extern-paginacao{
+  #extern-paginacao {
     display: flex;
     flex-direction: column;
     align-items: center;
   }
 
-  #paginacao button{ 
+  #paginacao button {
     background-color: #33333371;
     border-radius: 30px;
   }
 
 
-  label{
+  label {
     font-variant: all-small-caps;
+  }
+
+  .chaves-header{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    justify-content: end;
+  }
+
+  .buscar-input{
+    display: flex;
+    border: 1px solid #ccc;
+    height: 30px;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 10px;
+    padding: 0rem 0.5rem;
+    background-color: #fff;
+  }
+  .buscar-input input{
+    height: 100%;
+    width:300px;
+    border: 0;
+    outline: 0;
+  }
+
+  .chaves-header  button {
+    height: 30px;
+    width: 30px;
+    background-color: #0073ff;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  .blocos-agroup{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap:2rem;
+    padding: 2rem 0rem;
+  }
+
+  .bloco-card{
+    background-color: #fff;
+    padding: 1rem;
+    width: 300px;
+    border-radius: 10px;
+    display: flex;
+    gap: 1rem;
+    cursor: pointer;
+    transition: all 0.5s ease-out;
+  }
+
+  .bloco-card:hover{
+    box-shadow: 6px 6px 20px #ccc;
+  }
+
+  .bloco-card .icon{
+    width: 50px;
+    height: 50px;
+    background-color: #0073ff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff
+  }
+
+  #usuarios table button{
+    width: 30px;
+    height: 30px;
+    border-radius: 6px ;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    background-color: #ccc;
   }
